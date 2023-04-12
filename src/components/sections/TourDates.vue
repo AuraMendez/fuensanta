@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div>
-
+    <h2>Tour Dates</h2>
   </div>
 </template>
 
