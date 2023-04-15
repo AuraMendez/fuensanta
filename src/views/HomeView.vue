@@ -2,11 +2,11 @@
 <template>
   <main>
     <h1>Home</h1>
-    <Agenda></Agenda>
+    <SectionAgenda></SectionAgenda>
   </main>
 </template>
 
 <script setup>
-import Agenda from '../components/sections/Agenda.vue';
+import SectionAgenda from '../components/SectionAgenda.vue';
 
 </script>

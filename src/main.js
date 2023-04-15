@@ -14,8 +14,6 @@ import router from './router'
 import './assets/main.css'
 
 const vuetify = createVuetify({
-    components,
-    directives,
     icons: {
         defaultSet: 'mdi',
         aliases,
@@ -23,6 +21,8 @@ const vuetify = createVuetify({
             mdi,
         }
     },
+    components,
+    directives,
 })
 
 const app = createApp(App)
