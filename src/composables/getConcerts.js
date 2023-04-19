@@ -18,7 +18,6 @@ function getConcerts() {
             error.value = err.message;
         }
     }
-
     return { concerts, error, load }
 }
 

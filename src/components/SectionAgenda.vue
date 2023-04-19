@@ -7,7 +7,7 @@
                 <div class="list-item">
 
                     <div class="column">
-                        <v-list-item-title>{{ concert.date }}</v-list-item-title>
+                        <v-list-item-title>{{ formatDate(concert.date) }}</v-list-item-title>
                         <v-list-item-subtitle>{{ concert.program }}</v-list-item-subtitle>
                     <!-- <v-list-item-subtitle v-if="concert.description && !seeMore">
                             <v-btn flat @click="showDescription(concert.id)">See more</v-btn>
@@ -32,7 +32,9 @@
         <h4>Past concerts</h4>
         <v-list>
             <v-list-item v-for="concert in pastConcerts" :key="concert.id">
-                <v-list-item-subtitle> {{ concert.date }} - {{ concert.venue }}, {{ concert.location }} >> {{ concert.program }}</v-list-item-subtitle>
+                <v-list-item-subtitle> 
+                    {{ formatDate(concert.date) }} - {{ concert.venue }}, {{ concert.location }} >> {{ concert.program }}
+                </v-list-item-subtitle>
             </v-list-item>
         </v-list>
     </div>
@@ -58,7 +60,12 @@ export default {
 
         return { concerts, pastConcerts, futureConcerts};
     },
-
+    methods: {
+        formatDate(dateStr) {
+            const formattedDate = new Date(dateStr).toDateString().slice(4);
+            return formattedDate;
+        }
+    }
 }
 </script>
 
