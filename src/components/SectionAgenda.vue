@@ -51,11 +51,13 @@ export default {
 
         const pastConcerts = computed(() => {
             const today = new Date().toJSON().slice(0, 10);
-            return (concerts.value.filter((concert) => concert.date < today))
+            const filteredConcerts = concerts.value.filter((concert) => concert.date < today);
+            return filteredConcerts.sort((a, b) => b.date - a.date);
         })
         const futureConcerts = computed(() => {
             const today = new Date().toJSON().slice(0, 10);
-            return (concerts.value.filter((concert) => concert.date >= today))
+            const filteredConcerts = concerts.value.filter((concert) => concert.date >= today);
+            return filteredConcerts.sort((a, b) => b.date - a.date);
         })
 
         return { concerts, pastConcerts, futureConcerts};

@@ -5,15 +5,18 @@
             <v-row>
                 <v-text-field type="date" v-model="concertForm.date" :rules="[v => !!v || 'Date is required']"
                     required></v-text-field>
-                <v-text-field label="Program" v-model="concertForm.program" :rules="[v => !!v || 'Name of the program is required']" required></v-text-field>
+                <v-text-field label="Program" v-model="concertForm.program"
+                    :rules="[v => !!v || 'Name of the program is required']" required></v-text-field>
             </v-row>
             <v-row>
-                <v-text-field label="Venue" v-model="concertForm.venue" :rules="[v => !!v || 'Venue is required']" required></v-text-field>
-                <v-text-field label="Location" v-model="concertForm.location" :rules="[v => !!v || 'Location is required']" required></v-text-field>
+                <v-text-field label="Venue" v-model="concertForm.venue" :rules="[v => !!v || 'Venue is required']"
+                    required></v-text-field>
+                <v-text-field label="Location" v-model="concertForm.location" :rules="[v => !!v || 'Location is required']"
+                    required></v-text-field>
             </v-row>
         <!-- <v-row>
             <v-textarea label="Description (optional)" v-model="concertForm.description"></v-textarea>
-                    </v-row> -->
+                        </v-row> -->
             <v-row>
                 <h4>Tickets</h4>
             </v-row>
@@ -34,10 +37,11 @@
 
 <script>
 import { ref } from "vue";
-// import {  } from "../services";
+import { addNewConcert } from "../composables/addNewConcert"
 
 export default {
     setup() {
+        const { saveConcert } = addNewConcert();
         const concertForm = ref({
             date: '',
             program: '',
@@ -47,20 +51,20 @@ export default {
             soldOut: false,
             freeEntrance: false,
         });
-        return { concertForm}
+
+        const concert_form = ref(null);
+        async function validate() {
+            const { valid } = await concert_form.value.validate();
+            if (valid) {
+                saveConcert(concertForm.value);
+            }
+        }
+        return { concertForm, concert_form, validate }
     },
-    methods: {
-        async validate() {
-            // const { valid } = await this.$refs.concert_form.validate()
-            // if (valid) {
-                
-            // }
-        },
-    }
+
 }
 </script>
 
 <style scoped>
 /* Desktop */
-@media only screen and (min-width: 768px) {}
-</style>
+@media only screen and (min-width: 768px) {}</style>

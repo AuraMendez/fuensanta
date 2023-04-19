@@ -11,7 +11,6 @@ function getConcerts() {
             if (!concerts.value) {
                 throw Error('There was an error loading this information. Sorry for the inconvenience');
             }
-            concerts.value.sort((a, b) => b.date - a.date);
         } 
         catch (err) {
             console.log(err);
