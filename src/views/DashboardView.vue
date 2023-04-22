@@ -12,7 +12,7 @@
         </v-window-item>
 
         <v-window-item value="agenda">
-          <component :is="FormAgenda"></component>
+          <TabAgenda></TabAgenda>
         </v-window-item>
 
       </v-window>
@@ -20,11 +20,20 @@
   </v-card>
 </template>
 
-<script setup>
+<script>
 import { ref } from "vue";
-import FormAgenda from '../components/FormAgenda.vue';
+import TabAgenda from '../components/TabAgenda.vue';
 
-let tab = ref('agenda');
+export default {
+  name: 'DashboardView',
+  components: {
+    TabAgenda
+  },
+  setup() {
+    let tab = ref('agenda');
+    return { tab }
+  },
+}
 </script>
 
 <style></style>

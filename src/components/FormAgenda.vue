@@ -1,47 +1,54 @@
 
 <template>
-    <v-form ref="concert_form">
-        <v-container>
-            <v-row>
-                <v-text-field type="date" v-model="concertForm.date" :rules="[v => !!v || 'Date is required']"
-                    required></v-text-field>
-                <v-text-field label="Program" v-model="concertForm.program"
-                    :rules="[v => !!v || 'Name of the program is required']" required></v-text-field>
-            </v-row>
-            <v-row>
-                <v-text-field label="Venue" v-model="concertForm.venue" :rules="[v => !!v || 'Venue is required']"
-                    required></v-text-field>
-                <v-text-field label="Location" v-model="concertForm.location" :rules="[v => !!v || 'Location is required']"
-                    required></v-text-field>
-            </v-row>
-        <!-- <v-row>
-            <v-textarea label="Description (optional)" v-model="concertForm.description"></v-textarea>
-                        </v-row> -->
-            <v-row>
-                <h4>Tickets</h4>
-            </v-row>
-            <v-row>
-                <v-text-field label="Link to site" v-model="concertForm.ticketsUrl"></v-text-field>
-            </v-row>
-            <v-row>
-                <v-checkbox color="green" label="Soldout" v-model="concertForm.soldOut"></v-checkbox>
-                <v-checkbox color="green" label="Free entrance" v-model="concertForm.freeEntrance"></v-checkbox>
-            </v-row>
-            <v-row>
+    <v-overlay v-model="open" class="d-flex justify-space-around align-center">
+        <v-card width="80vw" class="pa-16">
+            <v-card-title class="d-flex">
+                New concert
                 <v-spacer></v-spacer>
-                <v-btn color="orange-lighten-3" @click="validate">Save</v-btn>
-            </v-row>
-        </v-container>
-    </v-form>
+                <v-btn @click="open = false" variant="text">X</v-btn>
+            </v-card-title>
+            <v-form ref="concert_form">
+                <v-container>
+                    <v-row>
+                        <v-text-field type="date" v-model="concertForm.date" :rules="[v => !!v || 'Date is required']"
+                            required></v-text-field>
+                        <v-text-field label="Program" v-model="concertForm.program"
+                            :rules="[v => !!v || 'Name of the program is required']" required></v-text-field>
+                    </v-row>
+                    <v-row>
+                        <v-text-field label="Venue" v-model="concertForm.venue" :rules="[v => !!v || 'Venue is required']"
+                            required></v-text-field>
+                        <v-text-field label="Location" v-model="concertForm.location"
+                            :rules="[v => !!v || 'Location is required']" required></v-text-field>
+                    </v-row>
+                    <v-row>
+                        <h4>Tickets</h4>
+                    </v-row>
+                    <v-row>
+                        <v-text-field label="Link to site" v-model="concertForm.ticketsUrl"></v-text-field>
+                    </v-row>
+                    <v-row>
+                        <v-checkbox color="green" label="Soldout" v-model="concertForm.soldOut"></v-checkbox>
+                        <v-checkbox color="green" label="Free entrance" v-model="concertForm.freeEntrance"></v-checkbox>
+                    </v-row>
+                    <v-row>
+                        <v-spacer></v-spacer>
+                        <v-btn color="orange-lighten-3" @click="validate">Save</v-btn>
+                    </v-row>
+                </v-container>
+            </v-form>
+        </v-card>
+    </v-overlay>
 </template>
 
 <script>
 import { ref } from "vue";
-import { addNewConcert } from "../composables/addNewConcert"
+import { addNewConcert } from "../composables/addNewConcert";
 
 export default {
     setup() {
         const { saveConcert } = addNewConcert();
+        const open = ref(true);
         const concertForm = ref({
             date: '',
             program: '',
@@ -59,12 +66,13 @@ export default {
                 saveConcert(concertForm.value);
             }
         }
-        return { concertForm, concert_form, validate }
-    },
 
+        return { open, concertForm, concert_form, validate }
+    },
 }
 </script>
 
 <style scoped>
 /* Desktop */
-@media only screen and (min-width: 768px) {}</style>
+@media only screen and (min-width: 768px) {}
+</style>
