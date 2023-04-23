@@ -1,18 +1,24 @@
 
 <template>
+    <v-btn @click="openForm">New concert</v-btn>
     <p>all concerts here</p>
-    <FormAgenda></FormAgenda>
+    <ConcertForm ref="concert_form_component"></ConcertForm>
 </template>
 
 <script>
-import FormAgenda from "./FormAgenda.vue";
+import { ref } from "vue";
+import ConcertForm from "./ConcertForm.vue";
 
 export default {
     components: {
-        FormAgenda
+        ConcertForm
     },
     setup() {
-
+        const concert_form_component = ref();
+        function openForm() {
+            concert_form_component.value.open();
+        }
+        return { concert_form_component, openForm }
     },
 }
 </script>

@@ -1,11 +1,13 @@
 
 <template>
-    <v-overlay v-model="open" class="d-flex justify-space-around align-center">
+    <v-overlay v-model="showing" class="d-flex justify-space-around align-center">
         <v-card width="80vw" class="pa-16">
             <v-card-title class="d-flex">
                 New concert
                 <v-spacer></v-spacer>
-                <v-btn @click="open = false" variant="text">X</v-btn>
+                <v-btn @click="close" variant="text">
+                    <v-icon icon="mdi-close"></v-icon>
+                </v-btn>
             </v-card-title>
             <v-form ref="concert_form">
                 <v-container>
@@ -22,14 +24,14 @@
                             :rules="[v => !!v || 'Location is required']" required></v-text-field>
                     </v-row>
                     <v-row>
-                        <h4>Tickets</h4>
+                        <h4 class="mb-3">Tickets</h4>
                     </v-row>
                     <v-row>
                         <v-text-field label="Link to site" v-model="concertForm.ticketsUrl"></v-text-field>
                     </v-row>
                     <v-row>
-                        <v-checkbox color="green" label="Soldout" v-model="concertForm.soldOut"></v-checkbox>
-                        <v-checkbox color="green" label="Free entrance" v-model="concertForm.freeEntrance"></v-checkbox>
+                        <v-checkbox label="Soldout" v-model="concertForm.soldOut"></v-checkbox>
+                        <v-checkbox label="Free entrance" v-model="concertForm.freeEntrance"></v-checkbox>
                     </v-row>
                     <v-row>
                         <v-spacer></v-spacer>
@@ -47,8 +49,18 @@ import { addNewConcert } from "../composables/addNewConcert";
 
 export default {
     setup() {
+        // Component
+        const showing = ref(false);
+        function open() {
+            showing.value = true;
+        }
+        
+        function close() {
+            showing.value = false;
+        }
+
+        // Concert
         const { saveConcert } = addNewConcert();
-        const open = ref(true);
         const concertForm = ref({
             date: '',
             program: '',
@@ -67,7 +79,9 @@ export default {
             }
         }
 
-        return { open, concertForm, concert_form, validate }
+
+
+        return { showing, open, close, concertForm, concert_form, validate }
     },
 }
 </script>
