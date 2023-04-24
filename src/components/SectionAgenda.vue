@@ -3,19 +3,12 @@
     <div>
         <h2>Tour Dates</h2>
         <v-list>
-            <v-list-item v-for="concert in futureConcerts" :key="concert.id">
+            <v-list-item v-for="concert in agendaStore.futureConcerts" :key="concert.id">
                 <div class="list-item">
 
                     <div class="column">
                         <v-list-item-title>{{ formatDate(concert.date) }}</v-list-item-title>
                         <v-list-item-subtitle>{{ concert.program }}</v-list-item-subtitle>
-                    <!-- <v-list-item-subtitle v-if="concert.description && !seeMore">
-                            <v-btn flat @click="showDescription(concert.id)">See more</v-btn>
-                        </v-list-item-subtitle>
-                        <div v-if="seeMore == concert.id">{{ concert.description }}</div>
-                        <v-list-item-subtitle v-if="seeMore === concert.id">
-                            <v-btn flat @click="hideDescription">See less</v-btn>
-                                </v-list-item-subtitle> -->
                     </div>
                     <div class="column city">
                         <v-list-item-subtitle>{{ concert.venue }}</v-list-item-subtitle>
@@ -31,7 +24,7 @@
         </v-list>
         <h4>Past concerts</h4>
         <v-list>
-            <v-list-item v-for="concert in pastConcerts" :key="concert.id">
+            <v-list-item v-for="concert in agendaStore.pastConcerts" :key="concert.id">
                 <v-list-item-subtitle> 
                     {{ formatDate(concert.date) }} - {{ concert.venue }}, {{ concert.location }} >> {{ concert.program }}
                 </v-list-item-subtitle>
@@ -41,33 +34,21 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { getConcerts } from "../composables/getConcerts"
+import { useAgendaStore } from "@/stores/agenda"
 
 export default {
     setup() {
-        const { concerts, load } = getConcerts();
-        load();
 
-        const pastConcerts = computed(() => {
-            const today = new Date().toJSON().slice(0, 10);
-            const filteredConcerts = concerts.value.filter((concert) => concert.date < today);
-            return filteredConcerts.sort((a, b) => b.date - a.date);
-        })
-        const futureConcerts = computed(() => {
-            const today = new Date().toJSON().slice(0, 10);
-            const filteredConcerts = concerts.value.filter((concert) => concert.date >= today);
-            return filteredConcerts.sort((a, b) => b.date - a.date);
-        })
+        const agendaStore = useAgendaStore();
+        agendaStore.getConcerts();
 
-        return { concerts, pastConcerts, futureConcerts};
-    },
-    methods: {
-        formatDate(dateStr) {
+        function formatDate(dateStr) {
             const formattedDate = new Date(dateStr).toDateString().slice(4);
             return formattedDate;
         }
-    }
+
+        return { agendaStore, formatDate };
+    },
 }
 </script>
 
