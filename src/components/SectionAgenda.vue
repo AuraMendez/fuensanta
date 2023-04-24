@@ -40,7 +40,6 @@ export default {
     setup() {
 
         const agendaStore = useAgendaStore();
-        agendaStore.getConcerts();
 
         function formatDate(dateStr) {
             const formattedDate = new Date(dateStr).toDateString().slice(4);

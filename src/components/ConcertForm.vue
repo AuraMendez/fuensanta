@@ -2,12 +2,10 @@
 <template>
     <v-overlay v-model="showing" class="d-flex justify-space-around align-center">
         <v-card width="80vw" class="pa-16">
-            <v-card-title class="d-flex">
+            <v-card-title class="d-flex mb-12">
                 New concert
                 <v-spacer></v-spacer>
-                <v-btn @click="close" variant="text">
-                    <v-icon icon="mdi-close"></v-icon>
-                </v-btn>
+                <v-btn @click="close" append-icon="mdi-close" color="lime-darken-4">close</v-btn>
             </v-card-title>
             <v-form ref="concert_form">
                 <v-container>
@@ -18,7 +16,7 @@
                             :rules="[v => !!v || 'Name of the program is required']" required></v-text-field>
                     </v-row>
                     <v-row>
-                        <v-text-field label="Venue" v-model="concertForm.venue" :rules="[v => !!v || 'Venue is required']"
+                        <v-text-field label="Venue / Festival" v-model="concertForm.venue" :rules="[v => !!v || 'Venue is required']"
                             required></v-text-field>
                         <v-text-field label="Location" v-model="concertForm.location"
                             :rules="[v => !!v || 'Location is required']" required></v-text-field>
@@ -35,7 +33,7 @@
                     </v-row>
                     <v-row>
                         <v-spacer></v-spacer>
-                        <v-btn color="orange-lighten-3" @click="validate">Save</v-btn>
+                        <v-btn color="lime-darken-4" @click="validate">Save</v-btn>
                     </v-row>
                 </v-container>
             </v-form>
