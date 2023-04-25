@@ -16,8 +16,8 @@
                             :rules="[v => !!v || 'Name of the program is required']" required></v-text-field>
                     </v-row>
                     <v-row>
-                        <v-text-field label="Venue / Festival" v-model="concertForm.venue" :rules="[v => !!v || 'Venue is required']"
-                            required></v-text-field>
+                        <v-text-field label="Venue / Festival" v-model="concertForm.venue"
+                            :rules="[v => !!v || 'Venue is required']" required></v-text-field>
                         <v-text-field label="Location" v-model="concertForm.location"
                             :rules="[v => !!v || 'Location is required']" required></v-text-field>
                     </v-row>
@@ -32,8 +32,9 @@
                         <v-checkbox label="Free entrance" v-model="concertForm.freeEntrance"></v-checkbox>
                     </v-row>
                     <v-row>
+                        <p class="text-red-darken-4">{{ error }}</p>
                         <v-spacer></v-spacer>
-                        <v-btn color="lime-darken-4" @click="validate">Save</v-btn>
+                        <v-btn color="lime-darken-4" @click="addNewConcert">Save</v-btn>
                     </v-row>
                 </v-container>
             </v-form>
@@ -43,22 +44,24 @@
 
 <script>
 import { ref } from "vue";
-import { addNewConcert } from "../composables/addNewConcert";
+import { addNewDoc } from "../services/firestore";
+import { useAgendaStore } from "@/stores/agenda"
 
 export default {
     setup() {
+        const agendaStore = useAgendaStore();
+
         // Component
         const showing = ref(false);
         function open() {
             showing.value = true;
         }
-        
+
         function close() {
             showing.value = false;
         }
 
         // Concert
-        const { saveConcert } = addNewConcert();
         const concertForm = ref({
             date: '',
             program: '',
@@ -69,17 +72,36 @@ export default {
             freeEntrance: false,
         });
 
+        const error =  ref('');
+
         const concert_form = ref(null);
-        async function validate() {
+        async function addNewConcert() {
             const { valid } = await concert_form.value.validate();
-            if (valid) {
-                saveConcert(concertForm.value);
+            if (!valid) {
+                error.value = 'Please fill in all the required fields'
+            } else {
+                error.value = '';
+                const newId = await addNewDoc('concerts', concertForm.value);
+                if (newId) {
+                    concertForm.value = {
+                        date: '',
+                        program: '',
+                        venue: '',
+                        location: '',
+                        ticketsUrl: '',
+                        soldOut: false,
+                        freeEntrance: false,
+                    };
+                    agendaStore.getConcerts();
+                    close();
+                } else {
+                    error.value = 'There was an error saving the concert, try again';
+                }
             }
+
         }
 
-
-
-        return { showing, open, close, concertForm, concert_form, validate }
+        return { showing, open, close, error, concertForm, concert_form, addNewConcert }
     },
 }
 </script>
