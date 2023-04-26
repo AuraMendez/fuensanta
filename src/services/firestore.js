@@ -1,6 +1,6 @@
 import db from "../firebaseConfig";
 
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
 
 async function getAllDocs(collectionName) {
     const allDocs = [];
@@ -26,7 +26,12 @@ async function addNewDoc(collectionName, newDoc) {
     }
 }
 
+async function deleteOneDoc(collectionName, docId) {
+    await deleteDoc(doc(db, collectionName, docId));
+}
+
 export {
     getAllDocs,
     addNewDoc,
+    deleteOneDoc,
 }

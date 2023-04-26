@@ -11,7 +11,7 @@
                 <p class="column venue">{{ concert.venue }}, {{ concert.location }}</p>
                 <span class="column actions">
                     <v-btn icon="mdi-pencil" size="x-small" variant="text"></v-btn>
-                    <v-btn icon="mdi-delete" size="x-small" variant="text"></v-btn>
+                    <v-btn icon="mdi-delete" size="x-small" variant="text" @click="deleteConcert(concert)"></v-btn>
                 </span>
             </div>
         </v-list-item>
@@ -31,25 +31,43 @@
         </v-list-item>
     </v-list>
     <ConcertForm ref="concert_form_component"></ConcertForm>
+    <ConfirmDialog ref="confirm_dialog_component"></ConfirmDialog>
+
 </template>
 
 <script>
 import { ref } from "vue";
 import ConcertForm from "./ConcertForm.vue";
+import ConfirmDialog from "./ConfirmDialog.vue";
 import { useAgendaStore } from "@/stores/agenda"
+import { deleteOneDoc } from "../services/firestore";
+
 
 export default {
     components: {
-        ConcertForm
+        ConcertForm,
+        ConfirmDialog,
     },
     setup() {
+        const agendaStore = useAgendaStore();
         const concert_form_component = ref();
+        const confirm_dialog_component = ref();
+
         function openForm() {
             concert_form_component.value.open();
         }
 
-        const agendaStore = useAgendaStore();
-        return { concert_form_component, openForm, agendaStore }
+        async function deleteConcert(concert) {
+            const confirm = await confirm_dialog_component.value.open(`Are you sure you want the event ${concert.program} on ${concert.date}?`);
+            if (confirm) {
+                await deleteOneDoc('concerts', concert.id);
+                agendaStore.getConcerts();
+            } else {
+                console.log('Delete canceled');
+            }
+        }
+
+        return { concert_form_component, confirm_dialog_component, openForm, agendaStore, deleteConcert }
     },
 }
 </script>
