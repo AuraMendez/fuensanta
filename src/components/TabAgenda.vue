@@ -58,7 +58,7 @@ export default {
         }
 
         async function deleteConcert(concert) {
-            const confirm = await confirm_dialog_component.value.open(`Are you sure you want the event ${concert.program} on ${concert.date}?`);
+            const confirm = await confirm_dialog_component.value.open(`Are you sure you want to delete the event '${concert.program}' on ${concert.date}?`);
             if (confirm) {
                 await deleteOneDoc('concerts', concert.id);
                 agendaStore.getConcerts();
