@@ -1,7 +1,7 @@
 
 <template>
     <div class="d-flex justify-end my-6">
-        <v-btn color="lime-darken-4" variant="outlined" @click="openForm">New concert</v-btn>
+        <v-btn color="lime-darken-4" variant="outlined" @click="openForm(null)">New concert</v-btn>
     </div>
     <v-list>
         <v-list-item v-for="concert in agendaStore.futureConcerts" :key="concert.id">
@@ -10,7 +10,7 @@
                 <p class="column date">{{ concert.date }} - {{ concert.program }}</p>
                 <p class="column venue">{{ concert.venue }}, {{ concert.location }}</p>
                 <span class="column actions">
-                    <v-btn icon="mdi-pencil" size="x-small" variant="text"></v-btn>
+                    <v-btn icon="mdi-pencil" size="x-small" variant="text" @click="openForm(concert.id)"></v-btn>
                     <v-btn icon="mdi-delete" size="x-small" variant="text" @click="deleteConcert(concert)"></v-btn>
                 </span>
             </div>
@@ -25,14 +25,13 @@
                 <p class="column venue">{{ concert.venue }}, {{ concert.location }}</p>
                 <span class="column actions">
                     <v-btn icon="mdi-pencil" size="x-small" variant="text"></v-btn>
-                    <v-btn icon="mdi-delete" size="x-small" variant="text"></v-btn>
+                    <v-btn icon="mdi-delete" size="x-small" variant="text" @click="deleteConcert(concert)"></v-btn>
                 </span>
             </div>
         </v-list-item>
     </v-list>
     <ConcertForm ref="concert_form_component"></ConcertForm>
     <ConfirmDialog ref="confirm_dialog_component"></ConfirmDialog>
-
 </template>
 
 <script>
@@ -50,17 +49,26 @@ export default {
     },
     setup() {
         const agendaStore = useAgendaStore();
-        const concert_form_component = ref();
-        const confirm_dialog_component = ref();
 
-        function openForm() {
-            concert_form_component.value.open();
+        // Concert Form Component
+        const concert_form_component = ref();
+        function openForm(id) {
+            if (id) {
+                concert_form_component.value.open(id);
+            } else {
+                concert_form_component.value.open(null);
+            }
         }
 
+        // Delete concert flow
+        const confirm_dialog_component = ref();
         async function deleteConcert(concert) {
             const confirm = await confirm_dialog_component.value.open(`Are you sure you want to delete the event '${concert.program}' on ${concert.date}?`);
             if (confirm) {
-                await deleteOneDoc('concerts', concert.id);
+                const deleted = await deleteOneDoc('concerts', concert.id);
+                if (deleted) {
+                    console.log('DELETED:', concert.id);
+                }
                 agendaStore.getConcerts();
             } else {
                 console.log('Delete canceled');
@@ -82,6 +90,7 @@ export default {
     align-self: center;
     margin-bottom: 24px;
 }
+
 .column {
     width: 100%;
     text-align: center;
@@ -95,9 +104,9 @@ export default {
     }
 
     .column {
-    width: 100%;
-    text-align: left;
-}
+        width: 100%;
+        text-align: left;
+    }
 
     .column.actions {
         width: 25%;

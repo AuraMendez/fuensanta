@@ -34,7 +34,7 @@
                     <v-row>
                         <p class="text-red-darken-4">{{ error }}</p>
                         <v-spacer></v-spacer>
-                        <v-btn color="lime-darken-4" @click="addNewConcert">Save</v-btn>
+                        <v-btn color="lime-darken-4" @click="saveConcert(null)">Save</v-btn>
                     </v-row>
                 </v-container>
             </v-form>
@@ -44,24 +44,13 @@
 
 <script>
 import { ref } from "vue";
-import { addNewDoc } from "../services/firestore";
+import { addNewDoc, updateOneDoc } from "../services/firestore";
 import { useAgendaStore } from "@/stores/agenda"
 
 export default {
     setup() {
         const agendaStore = useAgendaStore();
-
-        // Component
-        const showing = ref(false);
-        function open() {
-            showing.value = true;
-        }
-
-        function close() {
-            showing.value = false;
-        }
-
-        // Concert
+        let concertId = null;
         const concertForm = ref({
             date: '',
             program: '',
@@ -71,37 +60,92 @@ export default {
             soldOut: false,
             freeEntrance: false,
         });
+        const error = ref('');
 
-        const error =  ref('');
+        function emptyConcertForm() {
+            concertForm.value = {
+                date: '',
+                program: '',
+                venue: '',
+                location: '',
+                ticketsUrl: '',
+                soldOut: false,
+                freeEntrance: false,
+            }
+        }
 
+        function populateConcertForm(id) {
+            const oneConcert = agendaStore.getOneConcert(id);
+            if (oneConcert) {
+                concertForm.value = {
+                    date: oneConcert.date,
+                    program: oneConcert.program,
+                    venue: oneConcert.venue,
+                    location: oneConcert.location,
+                    ticketsUrl: oneConcert.ticketsUrl,
+                    soldOut: oneConcert.soldOut,
+                    freeEntrance: oneConcert.freeEntrance,
+                }
+            }
+        }
+
+        // Component open and close
+        const showing = ref(false);
+        function open(id) {
+            if (id) {
+                concertId = id;
+                populateConcertForm(id);
+            }
+            showing.value = true;
+        }
+
+        function close() {
+            emptyConcertForm();
+            concertId = null;
+            showing.value = false;
+        }
+
+        // Save concert
         const concert_form = ref(null);
-        async function addNewConcert() {
+
+        async function updateConcert() {
+            const updated = await updateOneDoc('concerts', concertId, concertForm.value);
+            if (updated) {
+                agendaStore.getConcerts();
+                console.log('UPDATED:', concertId);
+                close();
+            } else {
+                error.value = 'There was an error updating the concert, try again';
+            }
+        }
+
+        async function createConcert() {
+            const newId = await addNewDoc('concerts', concertForm.value);
+            if (newId) {
+                agendaStore.getConcerts();
+                console.log('CREATED:', newId);
+
+                close();
+            } else {
+                error.value = 'There was an error saving the concert, try again';
+            }
+        }
+
+        async function saveConcert() {
             const { valid } = await concert_form.value.validate();
             if (!valid) {
                 error.value = 'Please fill in all the required fields'
             } else {
                 error.value = '';
-                const newId = await addNewDoc('concerts', concertForm.value);
-                if (newId) {
-                    concertForm.value = {
-                        date: '',
-                        program: '',
-                        venue: '',
-                        location: '',
-                        ticketsUrl: '',
-                        soldOut: false,
-                        freeEntrance: false,
-                    };
-                    agendaStore.getConcerts();
-                    close();
+                if (concertId) {
+                    updateConcert();
                 } else {
-                    error.value = 'There was an error saving the concert, try again';
+                    createConcert();
                 }
             }
-
         }
 
-        return { showing, open, close, error, concertForm, concert_form, addNewConcert }
+        return { showing, open, close, error, concertForm, concert_form, saveConcert }
     },
 }
 </script>

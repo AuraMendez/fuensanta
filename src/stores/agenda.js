@@ -11,12 +11,17 @@ export const useAgendaStore = defineStore('agenda', () => {
     try {
       agenda.value = await getAllDocs('concerts');
       if (!agenda.value) {
-        throw Error('There was an error loading this information. Sorry for the inconvenience');
+        throw Error('There was an error loading the Agenda. Sorry for the inconvenience');
       }
     }
     catch (err) {
-      console.log(err); 
+      console.log(err);
     }
+  }
+
+  function getOneConcert(id) {
+    const oneConcert = agenda.value.find(concert => concert.id === id)
+    return oneConcert;
   }
 
   // getters
@@ -31,5 +36,5 @@ export const useAgendaStore = defineStore('agenda', () => {
     return filteredConcerts.sort((a, b) => b.date - a.date);
   })
 
-  return { agenda, pastConcerts, futureConcerts, getConcerts }
+  return { agenda, getConcerts, getOneConcert, pastConcerts, futureConcerts }
 })
