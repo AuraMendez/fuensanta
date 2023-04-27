@@ -17,7 +17,7 @@
                     <div class="column tickets">
                         <p v-if="concert.soldOut">Sold out</p>
                         <p v-else-if="concert.freeEntrance">Free entrance</p>
-                        <v-btn v-else-if="concert.ticketsUrl">Tickets</v-btn>
+                        <v-btn v-else-if="concert.ticketsUrl" :href="concert.ticketsUrl" target="_blank">Tickets</v-btn>
                     </div>
                 </div>
             </v-list-item>
