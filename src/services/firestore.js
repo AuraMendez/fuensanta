@@ -1,4 +1,4 @@
-import db from "../firebaseConfig";
+import { db } from "../firebaseConfig";
 
 import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 
@@ -48,7 +48,7 @@ async function updateOneDoc(collectionName, docId, updateObj) {
     try {
         await updateDoc(docRef, updateObj);
         return 'success';
-    } catch (e){
+    } catch (e) {
         console.log("Error updating document: ", e);
         return null;
     }

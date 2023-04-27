@@ -30,6 +30,7 @@
 <script>
 import { ref } from "vue";
 import TabAgenda from '../components/TabAgenda.vue';
+// import { auth } from "../firebaseConfig";
 
 export default {
   name: 'DashboardView',
@@ -37,6 +38,9 @@ export default {
     TabAgenda
   },
   setup() {
+    // const user = auth.currentUser
+    // console.log(user);
+
     let tab = ref('agenda');
     return { tab }
   },
