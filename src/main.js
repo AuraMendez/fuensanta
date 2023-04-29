@@ -12,6 +12,7 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import router from './router'
 
 import './assets/main.css'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const vuetify = createVuetify({
     icons: {
@@ -25,10 +26,22 @@ const vuetify = createVuetify({
     directives,
 })
 
-const app = createApp(App)
+let app;
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log('User logged in:',user.uid);
+    } else {
+        console.log('User signed out');
+    }
 
-app.use(createPinia())
-app.use(router)
-app.use(vuetify)
+    if (!app) {
+        app = createApp(App)
 
-app.mount('#app')
+        app.use(createPinia())
+        app.use(router)
+        app.use(vuetify)
+
+        app.mount('#app')
+    }
+});

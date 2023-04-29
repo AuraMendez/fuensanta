@@ -20,31 +20,27 @@
 <script>
 import { ref } from 'vue';
 // import { loginUser } from '../services/authentication';
-import { auth } from "../firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useUserStore } from "@/stores/user"
-// import { useRouter } from 'vue-router';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from 'vue-router';
+
+const auth = getAuth();
 
 export default {
   setup() {
-    // const router = useRouter
-    const userStore = useUserStore();
+
+    const router = useRouter();
 
     const loginForm = ref({
       email: '',
       password: '',
     })
 
-    // const user = auth.currentUser
-    // console.log(user);
 
     function tryLogin() {
       signInWithEmailAndPassword(auth, loginForm.value.email, loginForm.value.password)
-        .then((userCredential) => {
+        .then(() => {
           // Signed in 
-          const user = userCredential.user;
-          console.log('Logged in:', user);
-          userStore.setCurrentUser(user);
+          router.push('/dashboard')
         })
         .catch((error) => {
           const errorCode = error.code;

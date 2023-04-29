@@ -1,9 +1,14 @@
 <template>
   <div class="pa-12">
-    <div class="d-flex mb-6">
+    <div class="d-flex mb-3">
       <h1>Fuensanta Official Site - Dashboard</h1>
       <v-spacer></v-spacer>
       <v-btn prepend-icon="mdi-home" to="/">Go to site</v-btn>
+    </div>
+    <div class="d-flex mb-6">
+      <v-btn prepend-icon="mdi-logout" size="small" class="d-flex mr-6">Logout</v-btn>
+      <v-icon icon="mdi-account-circle" class="mr-2"></v-icon>
+      <p>{{ userEmail }}</p>
     </div>
     <v-card>
       <v-tabs v-model="tab" bg-color="lime-darken-4">
@@ -30,7 +35,7 @@
 <script>
 import { ref } from "vue";
 import TabAgenda from '../components/TabAgenda.vue';
-// import { auth } from "../firebaseConfig";
+import { auth } from "../firebaseConfig";
 
 export default {
   name: 'DashboardView',
@@ -38,11 +43,10 @@ export default {
     TabAgenda
   },
   setup() {
-    // const user = auth.currentUser
-    // console.log(user);
+    const userEmail = ref(auth.currentUser.reloadUserInfo.email);
 
     let tab = ref('agenda');
-    return { tab }
+    return { tab, userEmail }
   },
 }
 </script>
