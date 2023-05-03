@@ -1,13 +1,35 @@
 
 <template>
-    <div>
+    <div class="section-agenda">
         <h2>Tour Dates</h2>
-        <v-list>
+
+        <v-container class="agenda-list">
+            <v-row v-for="concert in agendaStore.futureConcerts" :key="concert.id">
+                <v-col cols="3">
+                    <p>{{ formatDate(concert.date) }}</p>
+                </v-col>
+                <v-col cols="3">
+                    <p>{{ concert.program }}</p>
+                </v-col>
+                <v-col cols="3">
+                    <p>{{ concert.location }}</p>
+                    <p>{{ concert.venue }}</p>
+                </v-col>
+                <v-col cols="3">
+                    <p v-if="concert.soldOut">Sold out</p>
+                    <p v-else-if="concert.freeEntrance">Free entrance</p>
+                    <v-btn v-else-if="concert.ticketsUrl" :href="concert.ticketsUrl" target="_blank">Tickets</v-btn>
+                </v-col>
+            </v-row>
+        </v-container>
+        <!-- <v-list bg-color="transparent">
             <v-list-item v-for="concert in agendaStore.futureConcerts" :key="concert.id">
                 <div class="list-item">
 
-                    <div class="column">
+                    <div class="column date">
                         <v-list-item-title>{{ formatDate(concert.date) }}</v-list-item-title>
+                    </div>
+                    <div class="column">
                         <v-list-item-subtitle>{{ concert.program }}</v-list-item-subtitle>
                     </div>
                     <div class="column city">
@@ -21,15 +43,45 @@
                     </div>
                 </div>
             </v-list-item>
-        </v-list>
+        </v-list> -->
         <h4>Past concerts</h4>
-        <v-list>
+        <!-- <v-container class="agenda-list">
+            <v-row v-for="concert in agendaStore.pastConcerts" :key="concert.id">
+                <v-col cols="3">
+                    <p>{{ formatDate(concert.date) }}</p>
+                </v-col>
+                <v-col cols="3">
+                    <p>{{ concert.program }}</p>
+                </v-col>
+                <v-col cols="3">
+                    <p>{{ concert.location }}</p>
+                    <p>{{ concert.venue }}</p>
+                </v-col>
+                <v-col cols="3">
+                </v-col>
+            </v-row>
+        </v-container> -->
+        <v-container class="agenda-list">
+            <v-row v-for="concert in agendaStore.pastConcerts" :key="concert.id">
+                <v-col cols="3">
+                    <p>{{ formatDate(concert.date) }}</p>
+                </v-col>
+                <v-col cols="4">
+                    <p>{{ concert.program }}</p>
+                </v-col>
+                <v-col cols="3">
+                    <p>{{ concert.venue }}, {{ concert.location }}</p>
+                </v-col>
+ 
+            </v-row>
+        </v-container>
+        <!-- <v-list bg-color="transparent">
             <v-list-item v-for="concert in agendaStore.pastConcerts" :key="concert.id">
-                <v-list-item-subtitle> 
+                <v-list-item-subtitle>
                     {{ formatDate(concert.date) }} - {{ concert.venue }}, {{ concert.location }} >> {{ concert.program }}
                 </v-list-item-subtitle>
             </v-list-item>
-        </v-list>
+        </v-list> -->
     </div>
 </template>
 
@@ -52,16 +104,11 @@ export default {
 </script>
 
 <style scoped>
-.list-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 
-.column {
-    width: 100%;
+.section-agenda {
+    text-align: center;
+    padding-bottom: 6rem;
 }
-
 
 /* Desktop */
 @media only screen and (min-width: 768px) {
@@ -69,12 +116,20 @@ export default {
         flex-direction: row;
     }
 
+    /* .column {
+        width: 50%;
+    } */
+
     .column.tickets {
-        width: 40%;
+        width: 130px;
     }
 
-    .column.city {
-        width: 50%;
-    }
+    /* .column.date {
+        width: 110px;
+    } */
+
+    /* .column.city {
+        width: 110px;
+    } */
 }
 </style>
