@@ -4,6 +4,7 @@
 #app {
 
   background-color: var(--bg-color);
+  font-family: var(--main-font);
   
   /* max-width: 1280px;
   margin: 0 auto;
@@ -11,9 +12,6 @@
 
   font-weight: normal; */
 }
-
-a,
-÷
 
 @media (hover: hover) {
   /* a:hover {

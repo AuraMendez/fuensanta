@@ -1,7 +1,7 @@
 
 <template>
     <div class="section-agenda">
-        <h1 class="my-6">Tour Dates</h1>
+        <h1 class="my-6">TOUR DATES</h1>
 
         <v-container class="agenda-list">
             <v-row v-for="concert in agendaStore.futureConcerts" :key="concert.id">
@@ -24,7 +24,7 @@
         </v-container>
 
         <div ref="pastConcertsTitle" class="past-concerts-header my-6" @click="togglePastConcerts">
-            <h4>Past concerts</h4>
+            <h4>PAST CONCERTS</h4>
             <v-icon v-if="showPastConcerts" icon="mdi-chevron-up"></v-icon>
             <v-icon v-else icon="mdi-chevron-down"></v-icon>
         </div>
@@ -83,9 +83,15 @@ export default {
 .section-agenda {
     padding-bottom: 6rem;
 }
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+}
 .date {
     text-align: end;
 }
+/* .venue {} */
 .tickets {
     text-align: end;
 }

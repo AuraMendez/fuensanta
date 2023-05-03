@@ -7,8 +7,8 @@
     <template v-if="overlay">
         <div class="overlay" @click="overlay = false">
             <ol class="menu">
-                <li v-for="item in menuItems" :key="item.name">
-                    <router-link :to="item.route">{{ item.name }}</router-link>
+                <li v-for="(item, i) in menuItems" :key="i">
+                    <router-link :to="item.route">{{ (i + 1) }}. {{ item.name }}</router-link>
                 </li>
             </ol>
             <v-btn icon="mdi-close" class="close" variant="text" @click="overlay = false"></v-btn>
@@ -34,9 +34,9 @@ export default {
     setup() {
 
         const menuItems = [
-            { name: 'Bio', route: '/bio' },
-            { name: 'Video', route: '/video' },
-            { name: 'Music', route: '/music' },
+            { name: 'BIO', route: '/bio' },
+            { name: 'VIDEO', route: '/video' },
+            { name: 'MUSIC', route: '/music' },
         ];
         const overlay = ref(false);
 
@@ -88,6 +88,8 @@ footer {
     display: flex;
     padding: 2rem;
     color: white;
+    text-align: center;
+    font-size: 2rem;
 }
 
 .overlay .close {
@@ -97,6 +99,10 @@ footer {
 .overlay .menu {
     align-self: center;
     margin: 0 auto;
+}
+
+.overlay ol{
+    list-style-type: none;
 }
 
 .menu a {
