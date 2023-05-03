@@ -23,7 +23,7 @@
             </v-row>
         </v-container>
 
-        <div class="past-concerts-header my-6" @click="showPastConcerts = !showPastConcerts">
+        <div ref="pastConcertsTitle" class="past-concerts-header my-6" @click="togglePastConcerts">
             <h4>Past concerts</h4>
             <v-icon v-if="showPastConcerts" icon="mdi-chevron-up"></v-icon>
             <v-icon v-else icon="mdi-chevron-down"></v-icon>
@@ -55,13 +55,25 @@ export default {
 
         const agendaStore = useAgendaStore();
 
-        const showPastConcerts = ref(false);
         function formatDate(dateStr) {
-            const formattedDate = new Date(dateStr).toDateString().slice(4);
-            return formattedDate;
+            const date = new Date(dateStr);
+            const month = date.toLocaleString('default', { month: 'long' }).toUpperCase();
+            // const year = date.getFullYear();
+            return `${month} ${date.getDate()}, ${date.getFullYear()}`;
+            // return `${month} ${date.getDate()}`;
+        }
+        
+        const showPastConcerts = ref(false);
+        const pastConcertsTitle = ref();
+        function togglePastConcerts () {
+            showPastConcerts.value = !showPastConcerts.value;
+            if (showPastConcerts.value) {
+                console.log(pastConcertsTitle);
+                pastConcertsTitle.value.scrollIntoView();
+            }
         }
 
-        return { agendaStore, formatDate, showPastConcerts };
+        return { agendaStore, formatDate, showPastConcerts, pastConcertsTitle, togglePastConcerts };
     },
 }
 </script>
@@ -71,7 +83,9 @@ export default {
 .section-agenda {
     padding-bottom: 6rem;
 }
-
+.date {
+    text-align: end;
+}
 .tickets {
     text-align: end;
 }
