@@ -12,6 +12,16 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/bio',
+      name: 'bio',
+      component: () => import('../views/BioView.vue'),
+    },
+    {
+      path: '/video',
+      name: 'video',
+      component: () => import('../views/VideoView.vue'),
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),

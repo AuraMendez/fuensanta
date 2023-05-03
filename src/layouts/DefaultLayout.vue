@@ -1,6 +1,8 @@
 <template>
     <header>
+        <router-link to="/">
             <img class="title" src="../../public/fuensanta.png" alt="" height="60">
+        </router-link>
             <img class="menu-btn" src="../../public/menu-btn.png" width="60" @click="overlay = true" />
     </header>
     <!-- MENU -->

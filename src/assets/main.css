@@ -1,7 +1,7 @@
 @import './base.css';
 @import '@mdi/font/css/materialdesignicons.css';
 
-#app {
+html {
 
   background-color: var(--bg-color);
   font-family: var(--main-font);
