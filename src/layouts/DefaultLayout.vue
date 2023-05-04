@@ -1,9 +1,9 @@
 <template>
     <header>
         <router-link to="/">
-            <img class="title" src="../../public/fuensanta.png" alt="" height="60">
+            <img class="title" src="../../public/fuensanta-min.png" alt="" height="80">
         </router-link>
-            <img class="menu-btn" src="../../public/menu-btn.png" width="60" @click="overlay = true" />
+            <img class="menu-btn" src="../../public/menu-btn-min.png" width="60" @click="overlay = true" />
     </header>
     <!-- MENU -->
     <template v-if="overlay">
@@ -69,7 +69,7 @@ header .menu-btn:hover {
 
 main {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 3rem auto;
     padding: 0 3rem;
 }
 

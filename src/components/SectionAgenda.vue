@@ -1,11 +1,11 @@
 
 <template>
     <div class="section-agenda">
-        <h1 class="my-6">TOUR DATES</h1>
+        <img src="../../public/tour-min.png" alt="" height="50" class="mb-12">
 
         <v-container class="agenda-list">
-            <template v-for="concert in agendaStore.futureConcerts" :key="concert.id">
-                <v-divider v-if="smAndDown" class="my-9"></v-divider>
+            <template v-for="(concert, i) in agendaStore.futureConcerts" :key="concert.id">
+                <v-divider v-if="smAndDown && i" class="my-9"></v-divider>
                 <v-row>
                     <v-col :cols="smAndDown ? 12 : 3" class="date">
                         <p>{{ formatDate(concert.date) }}</p>
@@ -21,20 +21,25 @@
                         class="tickets">
                         <p v-if="concert.soldOut" class="text-red-darken-4">Sold out</p>
                         <p v-else-if="concert.freeEntrance" class="text-green-darken-4">Free entrance</p>
-                        <v-btn v-else-if="concert.ticketsUrl" :href="concert.ticketsUrl" target="_blank">Tickets</v-btn>
+                        <div v-else-if="concert.ticketsUrl" class="tickets-btn">
+                            <a :href="concert.ticketsUrl" target="_blank">
+                                <img src="../../public/tickets-btn-min.png" alt="" height="39">
+                            </a>
+                        </div>
                     </v-col>
                 </v-row>
             </template>
         </v-container>
 
         <div ref="pastConcertsTitle" class="past-concerts-header my-6" @click="togglePastConcerts">
-            <h4>PAST CONCERTS</h4>
+            <img src="../../public/past-concerts-1-min.png" alt="" height="30">
             <v-icon v-if="showPastConcerts" icon="mdi-chevron-up"></v-icon>
             <v-icon v-else icon="mdi-chevron-down"></v-icon>
         </div>
 
         <v-container class="agenda-list" v-if="showPastConcerts">
-            <template v-for="concert in agendaStore.pastConcerts" :key="concert.id">
+            <template v-for="(concert, i) in agendaStore.pastConcerts" :key="concert.id">
+                <v-divider v-if="smAndDown && i" class="my-9"></v-divider>
                 <v-row>
                     <v-col :cols="smAndDown ? 12 : 3" class="date">
                         <p>{{ formatDate(concert.date) }}</p>
@@ -47,7 +52,6 @@
                         <p class="venue">{{ concert.venue }}</p>
                     </v-col>
                 </v-row>
-                <v-divider v-if="smAndDown" class="my-9"></v-divider>
             </template>
         </v-container>
 
@@ -107,26 +111,30 @@ h1 {
     font-weight: 400;
 }
 
+/* .tickets-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 40px;
+} */
+
 .past-concerts-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 3rem;
 }
 
 .past-concerts-header:hover {
     background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
+.tickets-btn img:hover {
+    height: 40px;
+}
 
 /* Desktop */
 @media only screen and (min-width: 960px) {
 
     .date {
-        text-align: end;
-    }
-
-    .tickets {
         text-align: end;
     }
 }
