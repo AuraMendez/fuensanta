@@ -1,12 +1,17 @@
 /* color palette from <https://github.com/vuejs/theme> */
 @font-face {
   font-family: "Marion";
-  src: local("Marion"),   url(./fonts/Marion/Marion\ Regular.ttf) format("truetype");
+  src: local("Marion"), url(./fonts/Marion/Marion-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Baskerville";
+  src: local("Baskerville"), url(./fonts/Baskerville/Baskervville-Regular.ttf) format("truetype");
 }
 
 :root {
   --bg-color: #fefaee;
-  --main-font: "Marion", Georgia, Times, serif;
+  --main-font: "Baskerville", Georgia, Times, serif;
 }
 
 @media (prefers-color-scheme: dark) {
