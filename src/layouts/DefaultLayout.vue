@@ -10,7 +10,13 @@
         <div class="overlay" @click="overlay = false">
             <ol class="menu">
                 <li v-for="(item, i) in menuItems" :key="i">
-                    <router-link :to="item.route">{{ (i + 1) }}. {{ item.name }}</router-link>
+                    <router-link :to="item.route">
+                        <span>
+                            <img :src="`../../public/number-${i + 1}-min.png`" alt="" height="30" class="mr-6">
+                            <img :src="`../../public/title-${item.name}-min.png`" alt="" height="40">
+                        </span>
+                        {{ (i + 1) }}. {{ item.name }}
+                    </router-link>
                 </li>
             </ol>
             <v-btn icon="mdi-close" class="close" variant="text" @click="overlay = false"></v-btn>
@@ -36,11 +42,11 @@ export default {
     setup() {
 
         const menuItems = [
-            { name: 'TOUR', route: '/tour' },
-            { name: 'MUSIC', route: '/music' },
-            { name: 'VIDEO', route: '/video' },
-            { name: 'BIO', route: '/bio' },
-            { name: 'CONTACT', route: '/contact' },
+            { name: 'tour', route: '/tour' },
+            { name: 'music', route: '/music' },
+            { name: 'video', route: '/video' },
+            { name: 'bio', route: '/bio' },
+            { name: 'contact', route: '/contact' },
         ];
         const overlay = ref(false);
 
@@ -86,7 +92,7 @@ footer {
     width: 100%;
     height: 100vh;
     z-index: 30;
-    background-color: hsla(0, 0%, 0%, 0.8);
+    background-color: rgb(245, 207, 161);
     position: fixed;
     top: 0;
     display: flex;
@@ -115,7 +121,7 @@ footer {
 }
 
 .menu a:hover {
-    color: rgb(255, 186, 130);
+    color: rgb(245, 207, 161);
     text-decoration: none;
 }
 </style>
