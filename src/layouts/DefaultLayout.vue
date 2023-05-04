@@ -36,9 +36,11 @@ export default {
     setup() {
 
         const menuItems = [
-            { name: 'BIO', route: '/bio' },
-            { name: 'VIDEO', route: '/video' },
+            { name: 'TOUR', route: '/tour' },
             { name: 'MUSIC', route: '/music' },
+            { name: 'VIDEO', route: '/video' },
+            { name: 'BIO', route: '/bio' },
+            { name: 'CONTACT', route: '/contact' },
         ];
         const overlay = ref(false);
 
@@ -89,7 +91,7 @@ footer {
     top: 0;
     display: flex;
     padding: 2rem;
-    color: white;
+    color: var(--bg-color);
     text-align: center;
     font-size: 2rem;
 }
@@ -113,7 +115,7 @@ footer {
 }
 
 .menu a:hover {
-    color: rgb(151, 11, 11);
+    color: rgb(255, 186, 130);
     text-decoration: none;
 }
 </style>

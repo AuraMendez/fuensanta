@@ -4,23 +4,27 @@
         <h1 class="my-6">TOUR DATES</h1>
 
         <v-container class="agenda-list">
-            <v-row v-for="concert in agendaStore.futureConcerts" :key="concert.id">
-                <v-col cols="3" class="date">
-                    <p>{{ formatDate(concert.date) }}</p>
-                </v-col>
-                <v-col cols="4" class="program">
-                    <p>{{ concert.program }}</p>
-                </v-col>
-                <v-col cols="3" class="venue">
-                    <p>{{ concert.location }}</p>
-                    <p>{{ concert.venue }}</p>
-                </v-col>
-                <v-col cols="2" class="tickets">
-                    <p v-if="concert.soldOut">Sold out</p>
-                    <p v-else-if="concert.freeEntrance">Free entrance</p>
-                    <v-btn v-else-if="concert.ticketsUrl" :href="concert.ticketsUrl" target="_blank">Tickets</v-btn>
-                </v-col>
-            </v-row>
+            <template v-for="concert in agendaStore.futureConcerts" :key="concert.id">
+                <v-divider v-if="smAndDown" class="my-9"></v-divider>
+                <v-row>
+                    <v-col :cols="smAndDown ? 12 : 3" class="date">
+                        <p>{{ formatDate(concert.date) }}</p>
+                    </v-col>
+                    <v-col :cols="smAndDown ? 12 : 4" class="program">
+                        <p>{{ concert.program }}</p>
+                    </v-col>
+                    <v-col :cols="smAndDown ? 12 : 3">
+                        <p class="location">{{ concert.location }}</p>
+                        <p class="venue">{{ concert.venue }}</p>
+                    </v-col>
+                    <v-col v-if="concert.ticketsUrl || concert.soldOut || concert.freeEntrance" :cols="smAndDown ? 12 : 2"
+                        class="tickets">
+                        <p v-if="concert.soldOut" class="text-red-darken-4">Sold out</p>
+                        <p v-else-if="concert.freeEntrance" class="text-green-darken-4">Free entrance</p>
+                        <v-btn v-else-if="concert.ticketsUrl" :href="concert.ticketsUrl" target="_blank">Tickets</v-btn>
+                    </v-col>
+                </v-row>
+            </template>
         </v-container>
 
         <div ref="pastConcertsTitle" class="past-concerts-header my-6" @click="togglePastConcerts">
@@ -30,17 +34,21 @@
         </div>
 
         <v-container class="agenda-list" v-if="showPastConcerts">
-            <v-row v-for="concert in agendaStore.pastConcerts" :key="concert.id">
-                <v-col cols="3" class="date">
-                    <p>{{ formatDate(concert.date) }}</p>
-                </v-col>
-                <v-col cols="4" class="program">
-                    <p>{{ concert.program }}</p>
-                </v-col>
-                <v-col cols="2" class="venue">
-                    <p>{{ concert.venue }}, {{ concert.location }}</p>
-                </v-col>
-            </v-row>
+            <template v-for="concert in agendaStore.pastConcerts" :key="concert.id">
+                <v-row>
+                    <v-col :cols="smAndDown ? 12 : 3" class="date">
+                        <p>{{ formatDate(concert.date) }}</p>
+                    </v-col>
+                    <v-col :cols="smAndDown ? 12 : 4" class="program">
+                        <p>{{ concert.program }}</p>
+                    </v-col>
+                    <v-col :cols="smAndDown ? 12 : 3">
+                        <p class="location">{{ concert.location }}</p>
+                        <p class="venue">{{ concert.venue }}</p>
+                    </v-col>
+                </v-row>
+                <v-divider v-if="smAndDown" class="my-9"></v-divider>
+            </template>
         </v-container>
 
     </div>
@@ -49,9 +57,11 @@
 <script>
 import { useAgendaStore } from "@/stores/agenda"
 import { ref } from "vue";
+import { useDisplay } from 'vuetify'
 
 export default {
     setup() {
+        const { smAndDown } = useDisplay()
 
         const agendaStore = useAgendaStore();
 
@@ -62,10 +72,10 @@ export default {
             return `${month} ${date.getDate()}, ${date.getFullYear()}`;
             // return `${month} ${date.getDate()}`;
         }
-        
+
         const showPastConcerts = ref(false);
         const pastConcertsTitle = ref();
-        function togglePastConcerts () {
+        function togglePastConcerts() {
             showPastConcerts.value = !showPastConcerts.value;
             if (showPastConcerts.value) {
                 console.log(pastConcertsTitle);
@@ -73,27 +83,28 @@ export default {
             }
         }
 
-        return { agendaStore, formatDate, showPastConcerts, pastConcertsTitle, togglePastConcerts };
+        return { agendaStore, formatDate, showPastConcerts, pastConcertsTitle, togglePastConcerts, smAndDown };
     },
 }
 </script>
 
 <style scoped>
-
 .section-agenda {
     padding-bottom: 6rem;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
     font-size: 2rem;
 }
+
 .date {
-    text-align: end;
+    font-weight: bolder;
 }
-/* .venue {} */
-.tickets {
-    text-align: end;
+
+.venue {
+    font-weight: 400;
 }
 
 .past-concerts-header {
@@ -102,15 +113,21 @@ h1 {
     align-items: center;
     padding: 1rem;
 }
+
 .past-concerts-header:hover {
     background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
 /* Desktop */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 960px) {
 
+    .date {
+        text-align: end;
+    }
 
-
+    .tickets {
+        text-align: end;
+    }
 }
 </style>
