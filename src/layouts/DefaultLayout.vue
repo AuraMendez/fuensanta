@@ -9,13 +9,13 @@
     <template v-if="overlay">
         <div class="overlay" @click="overlay = false">
             <ol class="menu">
-                <li v-for="(item, i) in menuItems" :key="i">
+                <li v-for="(item, i) in menuItems" :key="i" class="mb-6">
                     <router-link :to="item.route">
-                        <span>
-                            <img :src="`../../public/number-${i + 1}-min.png`" alt="" height="30" class="mr-6">
+                        <span >
+                            <img :src="`../../public/number-${i + 1}-min.png`" alt="" height="30" class="mr-12">
                             <img :src="`../../public/title-${item.name}-min.png`" alt="" height="40">
                         </span>
-                        {{ (i + 1) }}. {{ item.name }}
+                        <!-- {{ (i + 1) }}. {{ item.name }} -->
                     </router-link>
                 </li>
             </ol>

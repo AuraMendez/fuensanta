@@ -1,7 +1,7 @@
 
 <template>
     <div class="section-agenda">
-        <img src="../../public/tour-min.png" alt="" height="50" class="mb-12">
+        <img src="../../public/title-tour-min.png" alt="" height="50" class="mb-12">
 
         <v-container class="agenda-list">
             <template v-for="(concert, i) in agendaStore.futureConcerts" :key="concert.id">
@@ -23,7 +23,7 @@
                         <p v-else-if="concert.freeEntrance" class="text-green-darken-4">Free entrance</p>
                         <div v-else-if="concert.ticketsUrl" class="tickets-btn">
                             <a :href="concert.ticketsUrl" target="_blank">
-                                <img src="../../public/tickets-btn-min.png" alt="" height="39">
+                                <img src="../../public/tickets-btn-up-min.png" alt="" height="39">
                             </a>
                         </div>
                     </v-col>
