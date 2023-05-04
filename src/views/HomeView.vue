@@ -1,30 +1,21 @@
 
 <template>
   <DafaultLayout>
-    <section>
-      <div class="noche-img">
-        <a href="https://orcd.co/noche" target="_blank">
-          <img src="../../public/noche-cover-min.jpg">
-        </a>
-      </div>
-    </section>
-    <section>
-      <SectionAgenda></SectionAgenda>
-    </section>
+    <div class="noche-img">
+      <a href="https://orcd.co/noche" target="_blank">
+        <img src="../../public/noche-cover-min.jpg">
+      </a>
+    </div>
   </DafaultLayout>
 </template>
 
 <script setup>
-import SectionAgenda from '../components/SectionAgenda.vue';
 import DafaultLayout from '../layouts/DefaultLayout.vue';
 </script>
 
 <style scoped>
-section {
-  margin: 3rem 0;
-}
-
 .noche-img {
+  margin: 3rem 0;
   text-align: center;
 }
 
