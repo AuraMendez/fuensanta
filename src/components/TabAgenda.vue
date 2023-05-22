@@ -49,7 +49,7 @@ export default {
         // Delete concert flow
         const confirm_dialog_component = ref();
         async function deleteConcert(concert) {
-            const confirm = await confirm_dialog_component.value.open(`Are you sure you want to delete the event '${concert.program}' on ${concert.date}?`);
+            const confirm = await confirm_dialog_component.value.open(`Are you sure you want to delete the event "${concert.program}" on ${concert.date}?`);
             if (confirm) {
                 const deleted = await deleteOneDoc('concerts', concert.id);
                 if (deleted) {

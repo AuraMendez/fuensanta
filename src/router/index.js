@@ -27,6 +27,16 @@ const router = createRouter({
       component: () => import('../views/VideoView.vue'),
     },
     {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('../views/ContactView.vue'),
+    },
+    {
+      path: '/music',
+      name: 'music',
+      component: () => import('../views/MusicView.vue'),
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),

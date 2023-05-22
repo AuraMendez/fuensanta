@@ -1,8 +1,8 @@
 <template>
     <DefaultLayout>
-        <div class="video-section">
+        <div class="video-section text-center">
 
-            <h1>Videos</h1>
+            <img class="title mb-8" src="../../public/title-video-min.png" alt="" height="30">
 
             <div class="videos">
                 <template v-for="video in videos" :key="video.id">

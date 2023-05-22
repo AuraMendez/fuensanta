@@ -3,23 +3,19 @@
         <router-link to="/">
             <img class="title" src="../../public/fuensanta-min.png" alt="" height="80">
         </router-link>
-            <img class="menu-btn" src="../../public/menu-btn-min.png" width="60" @click="overlay = true" />
+        <img class="menu-btn" src="../../public/menu-btn-min.png" width="60" @click="overlay = true" />
     </header>
     <!-- MENU -->
     <template v-if="overlay">
-        <div class="overlay" @click="overlay = false">
-            <ol class="menu">
-                <li v-for="(item, i) in menuItems" :key="i" class="mb-6">
-                    <router-link :to="item.route">
-                        <span >
-                            <img :src="`../../public/number-${i + 1}-min.png`" alt="" height="30" class="mr-12">
-                            <img :src="`../../public/title-${item.name}-min.png`" alt="" height="40">
-                        </span>
-                        <!-- {{ (i + 1) }}. {{ item.name }} -->
-                    </router-link>
-                </li>
-            </ol>
-            <v-btn icon="mdi-close" class="close" variant="text" @click="overlay = false"></v-btn>
+        <div class="overlay" :class="overlay ? 'visible' : null" @click="overlay = false">
+            <div class="menu">
+                <router-link v-for="(item, i) in menuItems" :key="i" class="mb-6" :to="item.route">
+                    <img :src="item.numImg" alt="" height="30" class="mr-12">
+                    <img :src="item.titleImg" alt="" height="40" class="menu-item">
+                </router-link>
+            </div>
+
+            <v-btn icon="mdi-close" class="close" variant="text" @click="overlay = false" color="black"></v-btn>
         </div>
     </template>
     <main>
@@ -27,26 +23,39 @@
     </main>
     <footer>
         <div>
-            <v-btn icon="mdi-instagram" variant="text" href="https://www.instagram.com/fuensanta.fuensanta/" target="_blank"></v-btn>
-            <v-btn icon="mdi-facebook" variant="text" href="https://www.facebook.com/fuensanta.mendezlecomte" target="_blank"></v-btn>
+            <v-btn icon="mdi-instagram" variant="text" href="https://www.instagram.com/fuensanta.fuensanta/"
+                target="_blank"></v-btn>
+            <v-btn icon="mdi-facebook" variant="text" href="https://www.facebook.com/fuensanta.mendezlecomte"
+                target="_blank"></v-btn>
             <v-btn icon="mdi-youtube" variant="text" href="https://www.youtube.com/@Fuensanta" target="_blank"></v-btn>
-            <v-btn icon="mdi-spotify" variant="text" href="https://open.spotify.com/artist/5Tda1L0VLxqMBAThEKFIjD" target="_blank"></v-btn>
+            <v-btn icon="mdi-spotify" variant="text" href="https://open.spotify.com/artist/5Tda1L0VLxqMBAThEKFIjD"
+                target="_blank"></v-btn>
         </div>
     </footer>
 </template>
 
 <script>
 import { ref } from 'vue';
+import tourTitleImg from '../../public/title-tour-min.png'
+import musicTitleImg from '../../public/title-music-min.png'
+import videoTitleImg from '../../public/title-video-min.png'
+import bioTitleImg from '../../public/title-bio-min.png'
+import contactTitleImg from '../../public/title-contact-min.png'
+import n1 from '../../public/number-1-min.png'
+import n2 from '../../public/number-2-min.png'
+import n3 from '../../public/number-3-min.png'
+import n4 from '../../public/number-4-min.png'
+import n5 from '../../public/number-5-min.png'
 
 export default {
     setup() {
 
         const menuItems = [
-            { name: 'tour', route: '/tour' },
-            { name: 'music', route: '/music' },
-            { name: 'video', route: '/video' },
-            { name: 'bio', route: '/bio' },
-            { name: 'contact', route: '/contact' },
+            { route: '/tour', numImg: n1, titleImg: tourTitleImg },
+            { route: '/music', numImg: n2, titleImg: musicTitleImg },
+            { route: '/video', numImg: n3, titleImg: videoTitleImg },
+            { route: '/bio', numImg: n4, titleImg: bioTitleImg },
+            { route: '/contact', numImg: n5, titleImg: contactTitleImg },
         ];
         const overlay = ref(false);
 
@@ -56,7 +65,6 @@ export default {
 </script>
 
 <style scoped>
-
 /* HEADER */
 header {
     text-align: center;
@@ -92,7 +100,7 @@ footer {
     width: 100%;
     height: 100vh;
     z-index: 30;
-    background-color: rgb(245, 207, 161);
+    background-color: #f8f0d9;
     position: fixed;
     top: 0;
     display: flex;
@@ -100,28 +108,23 @@ footer {
     color: var(--bg-color);
     text-align: center;
     font-size: 2rem;
+    /* transform: scale(0.1);
+    transition: transform 2s; */
 }
 
-.overlay .close {
+.overla .overlay .close {
     justify-items: end;
+    color: black;
 }
 
 .overlay .menu {
     align-self: center;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 
-.overlay ol{
-    list-style-type: none;
-}
-
-.menu a {
-    color: white;
-    text-decoration: none;
-}
-
-.menu a:hover {
-    color: rgb(245, 207, 161);
-    text-decoration: none;
+.overlay a:hover .menu-item {
+    height: 42px;
 }
 </style>
