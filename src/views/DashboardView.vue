@@ -14,6 +14,7 @@
       <v-tabs v-model="tab" bg-color="lime-darken-4">
         <v-tab value="info">Info</v-tab>
         <v-tab value="agenda">Agenda</v-tab>
+        <v-tab value="video">Video</v-tab>
       </v-tabs>
 
       <v-card-text>
@@ -26,6 +27,10 @@
             <TabAgenda></TabAgenda>
           </v-window-item>
 
+          <v-window-item value="video">
+            <TabVideo></TabVideo>
+          </v-window-item>
+
         </v-window>
       </v-card-text>
     </v-card>
@@ -34,18 +39,20 @@
 
 <script>
 import { ref } from "vue";
-import TabAgenda from '../components/TabAgenda.vue';
+import TabAgenda from '../components/DashboardAgenda.vue';
+import TabVideo from '../components/DashboardVideo.vue';
 import { auth } from "../firebaseConfig";
 
 export default {
   name: 'DashboardView',
   components: {
-    TabAgenda
+    TabAgenda,
+    TabVideo
   },
   setup() {
     const userEmail = ref(auth.currentUser.reloadUserInfo.email);
 
-    let tab = ref('agenda');
+    let tab = ref('video');
     return { tab, userEmail }
   },
 }
