@@ -5,10 +5,9 @@
             <img class="title mb-8" src="../../public/title-video-min.png" alt="" height="30">
 
             <div class="videos">
-                <template v-for="video in videos" :key="video.id">
-                    <iframe :src="`https://www.youtube.com/embed/${video.id}`"
-                    title="video.title" frameborder="0"
-                    allowfullscreen></iframe>
+                <template v-for="video in videoStore.videoStore" :key="video.id">
+                    <iframe :src="`https://www.youtube.com/embed/${video.videoId}`" title="video.title" frameborder="0"
+                        allowfullscreen></iframe>
                 </template>
                 <!-- allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" -->
             </div>
@@ -17,13 +16,11 @@
 </template>
 
 <script setup>
+import { useVideoStore } from '../stores/videos';
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 
-const videos = [
-    {title: 'Avalancha Dorada', id: 'J5bnBeVxppo'},
-    {title: 'Canción contra mi apatía', id: '_jnUeRaU8hc'},
-    // {title: '', id: ''},
-]
+const videoStore = useVideoStore();
+
 </script>
 
 <style scoped>

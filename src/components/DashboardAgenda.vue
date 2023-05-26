@@ -20,7 +20,7 @@
 
 <script>
 import { ref } from "vue";
-import ConcertForm from "./ConcertForm.vue";
+import FormAgenda from "./FormAgenda.vue";
 import ConfirmDialog from "./ConfirmDialog.vue";
 import AgendaListItem from "./AgendaListItem.vue";
 import { useAgendaStore } from "@/stores/agenda"
@@ -29,7 +29,7 @@ import { deleteOneDoc } from "../services/firestore";
 
 export default {
     components: {
-        ConcertForm,
+        ConcertForm: FormAgenda,
         ConfirmDialog,
         AgendaListItem
     },
