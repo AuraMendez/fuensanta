@@ -1,14 +1,22 @@
 
 <template>
-    <div class="d-flex justify-end my-6">
+    <div class="d-flex justify-space-between align-center my-6">
+        <p class="mr-4">Note: please be patient when clicking the up and down arrows. It takes a second to make the change.</p>
         <v-btn color="lime-darken-4" variant="outlined" @click="openForm(null)">New video</v-btn>
     </div>
     <v-list>
-        <v-list-item v-for="video in videoStore.videoStore" :key="video.id">
+        <v-list-item v-for="(video, i) in videoStore.videoStore" :key="video.id">
             <div class="video-list">
-                <div class="column order">
-                    <v-btn density="compact" variant="outlined"><v-icon icon="mdi-chevron-up"></v-icon></v-btn>
-                    <v-btn density="compact" variant="outlined"><v-icon icon="mdi-chevron-down"></v-icon></v-btn>
+                <div class="column order d-flex">
+                    <v-btn v-if="i !== videoStore.videoStore.length - 1" density="compact" variant="outlined"
+                        class="arrow-btn down" @click="changeOrder(video, videoStore.videoStore[i + 1])">
+                        <v-icon icon="mdi-chevron-down"></v-icon>
+                    </v-btn> 
+                    <v-spacer></v-spacer>
+                    <v-btn v-if="i" density="compact" variant="outlined" class="arrow-btn up"
+                        @click="changeOrder(video, videoStore.videoStore[i - 1])">
+                        <v-icon icon="mdi-chevron-up"></v-icon>
+                    </v-btn>
                 </div>
                 <p class="column title pl-4">{{ video.title }}</p>
                 <div class="column actions">
@@ -26,6 +34,7 @@
 import { ref } from "vue";
 import FormVideo from "./FormVideo.vue";
 import ConfirmDialog from "./ConfirmDialog.vue";
+import { updateOneDoc } from "../services/firestore";
 import { useVideoStore } from "@/stores/videos"
 import { deleteOneDoc } from "../services/firestore";
 
@@ -42,9 +51,9 @@ export default {
         const video_form_component = ref();
         function openForm(id) {
             if (id) {
-                video_form_component.value.open({id});
+                video_form_component.value.open({ id });
             } else {
-                video_form_component.value.open({id: null, order: videoStore.newItemOrder});
+                video_form_component.value.open({ id: null, order: videoStore.newItemOrder });
             }
         }
 
@@ -62,8 +71,19 @@ export default {
                 console.log('Delete canceled');
             }
         }
-        
-        return { video_form_component, confirm_dialog_component, videoStore, openForm, deleteVideo }
+
+        async function changeOrder(a, b) {
+            // console.log('Exchange:', a, b);
+            const updated1 = await updateOneDoc('videos', a.id, {order: b.order});
+            const updated2 = await updateOneDoc('videos', b.id, {order: a.order});
+            if (updated1 && updated2) {
+                videoStore.getVideos();
+            } else {
+                window.alert(`There was an error with this operations. Please contact Aura and let her know that this in in regards to the videos "${a.title}" and "${b.title}"`);
+            }
+        }
+
+        return { video_form_component, confirm_dialog_component, videoStore, openForm, deleteVideo, changeOrder }
     },
 }
 </script>
@@ -77,6 +97,10 @@ export default {
 
 .column.title {
     flex-grow: 1;
+}
+
+.column.order {
+    min-width: 135px;
 }
 </style>
 
