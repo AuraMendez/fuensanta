@@ -12,15 +12,16 @@
     </div>
     <v-card>
       <v-tabs v-model="tab" bg-color="lime-darken-4">
-        <v-tab value="info">Info</v-tab>
+        <v-tab value="bio">Bio</v-tab>
         <v-tab value="agenda">Agenda</v-tab>
         <v-tab value="video">Video</v-tab>
+        <v-tab value="music">Music</v-tab>
       </v-tabs>
 
       <v-card-text>
         <v-window v-model="tab">
-          <v-window-item value="info">
-            Bio / General info
+          <v-window-item value="bio">
+            <TabBio></TabBio>
           </v-window-item>
 
           <v-window-item value="agenda">
@@ -31,6 +32,10 @@
             <TabVideo></TabVideo>
           </v-window-item>
 
+          <!-- <v-window-item value="music">
+            <TabMusic></TabMusic>
+          </v-window-item> -->
+
         </v-window>
       </v-card-text>
     </v-card>
@@ -39,20 +44,24 @@
 
 <script>
 import { ref } from "vue";
+import TabBio from '../components/DashboardBio.vue';
 import TabAgenda from '../components/DashboardAgenda.vue';
 import TabVideo from '../components/DashboardVideo.vue';
+// import TabMusic from '../components/DashboardMusic.vue';
 import { auth } from "../firebaseConfig";
 
 export default {
   name: 'DashboardView',
   components: {
+    TabBio,
     TabAgenda,
-    TabVideo
+    TabVideo,
+    // TabMusic,
   },
   setup() {
     const userEmail = ref(auth.currentUser.reloadUserInfo.email);
 
-    let tab = ref('video');
+    let tab = ref('bio');
     return { tab, userEmail }
   },
 }

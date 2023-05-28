@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router';
 import { useAgendaStore } from "@/stores/agenda"
 import { useVideoStore } from "@/stores/videos"
+import { useBioStore } from "@/stores/bios"
 
 export default {
 
@@ -11,6 +12,9 @@ export default {
 
     const videoStore = useVideoStore();
     videoStore.getVideos();
+
+    const bioStore = useBioStore();
+    bioStore.getBios();
 
     return { RouterView }
   }

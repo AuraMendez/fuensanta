@@ -1,13 +1,41 @@
 <template>
     <DefaultLayout>
         <div class="bio-section text-center">
-            <img class="title mb-8" src="../../public/title-bio-min.png" alt="" height="30">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, ipsum, illum quo itaque officia similique
-                animi deleniti hic unde nam at. Numquam nihil nobis veniam, suscipit nemo maxime iure sit?</p>
+            <div>
+                <img class="title mb-8 mx-auto" src="../../public/title-bio-min.png" alt="" height="30">
+            </div>
+
+            <span>
+                <v-btn variant="text" @click="lang = 'en'">EN</v-btn> | 
+                <v-btn variant="text" @click="lang = 'es'">ES</v-btn>
+            </span>
+            <div class="text">
+                <p v-for="(text, index) in bioStore.bio[lang].split('\n')" :key="index">
+                    {{ text }}
+                </p>
+            </div>
         </div>
     </DefaultLayout>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import DefaultLayout from '../layouts/DefaultLayout.vue';
+import { useBioStore } from "@/stores/bios"
+
+const bioStore = useBioStore();
+const lang = ref('en');
 </script>
+
+<style scoped>
+
+.text {
+    max-width: 1000px;
+    text-align: justify;
+    margin: 0 auto;
+}
+
+.text p {
+    margin-top: 16px;
+}
+</style>
