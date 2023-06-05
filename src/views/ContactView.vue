@@ -3,23 +3,20 @@
         <div class="contact-section text-center">
             <img class="title mb-8" src="../../public/title-contact-min.png" alt="" height="30">
 
-            <h3>Contact me</h3>
-            <p>email@email.com</p>
+            <!-- <h3>Contact me</h3> -->
+            <p class="mail">email@email.com</p>
 
-            <h3>Subscribe to our mailing list</h3>
-            <v-form ref="mailing_form" @submit.prevent="submit">
-                <v-text-field label="Name" v-model="form.name" :rules="rules.name" :counter="20"></v-text-field>
-                <v-text-field label="Email" v-model="form.email" :rules="rules.email"></v-text-field>
-                <v-select
-                    label="Country/Region"
-                    v-model="form.country"
-                    :items="countries"
-                    item-title="name"
-                    item-value="code"
-                ></v-select>
-                <p v-if="message.text" :class="`mt-2 mb-4 text-${message.color}`">{{ message.text }}</p>
-                <v-btn type="submit">Subsribe</v-btn>
-            </v-form>
+            <div class="mailing-list mt-12">
+                <h3>Subscribe to our mailing list</h3>
+                <v-form ref="mailing_form" @submit.prevent="submit">
+                    <v-text-field label="Name" v-model="form.name" :rules="rules.name" :counter="20"></v-text-field>
+                    <v-text-field label="Email" v-model="form.email" :rules="rules.email"></v-text-field>
+                    <v-select label="Country/Region" v-model="form.country" :items="countries" item-title="name"
+                        item-value="code"></v-select>
+                    <p v-if="message.text" :class="`mt-2 mb-4 text-${message.color}`">{{ message.text }}</p>
+                    <v-btn type="submit">Subscribe</v-btn>
+                </v-form>
+            </div>
         </div>
     </DefaultLayout>
 </template>
@@ -88,4 +85,20 @@ async function submit() {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.mail {
+    font-size: 1.5rem;
+}
+.mailing-list {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+.mailing-list h3 {
+    margin-bottom: 24px;
+    text-transform: uppercase;
+}
+</style>
