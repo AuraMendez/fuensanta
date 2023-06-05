@@ -10,7 +10,13 @@
             <v-form ref="mailing_form" @submit.prevent="submit">
                 <v-text-field label="Name" v-model="form.name" :rules="rules.name" :counter="20"></v-text-field>
                 <v-text-field label="Email" v-model="form.email" :rules="rules.email"></v-text-field>
-                <v-select label="Country/Region"></v-select>
+                <v-select
+                    label="Country/Region"
+                    v-model="form.country"
+                    :items="countries"
+                    item-title="name"
+                    item-value="code"
+                ></v-select>
                 <p v-if="message.text" :class="`mt-2 mb-4 text-${message.color}`">{{ message.text }}</p>
                 <v-btn type="submit">Subsribe</v-btn>
             </v-form>
@@ -22,6 +28,7 @@
 import { ref } from 'vue';
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 import { addNewDoc } from "../services/firestore";
+import countries from "../assets/countries.json";
 
 const rules = {
     name: [
@@ -60,25 +67,21 @@ const defaultMessage = {
 };
 const message = ref({ ...defaultMessage });
 async function submit() {
-    console.log('submit');
     const { valid } = await mailing_form.value.validate();
     if (valid) {
         const timestamp = Date.now();
-        console.log(timestamp);
         const newId = await addNewDoc('mailingList', { ...form.value, timestamp });
         if (newId) {
-            // emptyForm();
             message.value.text = "Thank you, we've saved your information!";
             mailing_form.value.reset();
-            console.log('CREATED:', newId);
             setTimeout(() => { message.value = { ...defaultMessage } }, 8000);
         } else {
             message.value.text = 'There was an error saving the concert, try again';
-            message.value.color = 'red';
+            message.value.color = 'error';
         }
     } else {
         message.value.text = 'Please fill up all required fields';
-            message.value.color = 'red-darken-3';
+        message.value.color = 'error';
     }
 }
 
