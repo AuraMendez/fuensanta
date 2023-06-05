@@ -26,18 +26,31 @@ export const useMusicStore = defineStore('music', () => {
     return oneMusic;
   }
   // getters
-  const sectionMusic = computed((section) => {
-    return musicStore.value.filter((doc) => doc.section === section);
+  const personalMusic = computed(() => {
+    return musicStore.value.filter((doc) => doc.section === 'personal');
   });
 
-  const newItemOrder = computed((section) => {
+  const sidemanMusic = computed(() => {
+    return musicStore.value.filter((doc) => doc.section === 'sideman');
+  });
+
+  const newPersonalOrder = computed(() => {
     let order = 0;
-    const filtered = musicStore.value.filter((doc) => doc.section === section);
+    const filtered = musicStore.value.filter((doc) => doc.section === 'personal');
     if (filtered.length) {
       order = parseInt(filtered[0].order);
     }
     return order + 1;
-  })
+  });
 
-  return { musicStore, getMusic, getOneMusic, sectionMusic, newItemOrder }
+  const newSidemanOrder = computed(() => {
+    let order = 0;
+    const filtered = musicStore.value.filter((doc) => doc.section === 'sideman');
+    if (filtered.length) {
+      order = parseInt(filtered[0].order);
+    }
+    return order + 1;
+  });
+
+  return { musicStore, getMusic, getOneMusic, sidemanMusic, personalMusic, newPersonalOrder, newSidemanOrder }
 })
