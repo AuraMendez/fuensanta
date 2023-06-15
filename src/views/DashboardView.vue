@@ -32,9 +32,9 @@
             <TabVideo></TabVideo>
           </v-window-item>
 
-          <!-- <v-window-item value="music">
+          <v-window-item value="music">
             <TabMusic></TabMusic>
-          </v-window-item> -->
+          </v-window-item>
 
         </v-window>
       </v-card-text>
@@ -47,7 +47,7 @@ import { ref } from "vue";
 import TabBio from '../components/DashboardBio.vue';
 import TabAgenda from '../components/DashboardAgenda.vue';
 import TabVideo from '../components/DashboardVideo.vue';
-// import TabMusic from '../components/DashboardMusic.vue';
+import TabMusic from '../components/DashboardMusic.vue';
 import { auth } from "../firebaseConfig";
 
 export default {
@@ -56,12 +56,12 @@ export default {
     TabBio,
     TabAgenda,
     TabVideo,
-    // TabMusic,
+    TabMusic,
   },
   setup() {
     const userEmail = ref(auth.currentUser.reloadUserInfo.email);
 
-    let tab = ref('bio');
+    let tab = ref('music');
     return { tab, userEmail }
   },
 }

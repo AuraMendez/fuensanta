@@ -21,7 +21,7 @@ export const useMusicStore = defineStore('music', () => {
     }
   }
 
-  function getOneMusic(id) {
+  function getOneMusicItem(id) {
     const oneMusic = musicStore.value.find(music => music.id === id)
     return oneMusic;
   }
@@ -52,5 +52,5 @@ export const useMusicStore = defineStore('music', () => {
     return order + 1;
   });
 
-  return { musicStore, getMusic, getOneMusic, sidemanMusic, personalMusic, newPersonalOrder, newSidemanOrder }
+  return { musicStore, getMusic, getOneMusicItem, sidemanMusic, personalMusic, newPersonalOrder, newSidemanOrder }
 })
