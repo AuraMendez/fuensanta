@@ -7,7 +7,7 @@
             <p class="mail">email@email.com</p>
 
             <div class="mailing-list mt-12">
-                <h3>Subscribe to our mailing list</h3>
+                <h3>Subscribe to my mailing list</h3>
                 <v-form ref="mailing_form" @submit.prevent="submit">
                     <v-text-field label="Name" v-model="form.name" :rules="rules.name" :counter="20"></v-text-field>
                     <v-text-field label="Email" v-model="form.email" :rules="rules.email"></v-text-field>

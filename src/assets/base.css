@@ -12,6 +12,7 @@
 :root {
   --bg-color: #fefaee;
   --main-font: "Baskerville", Georgia, Times, serif;
+  --max-width: 900px;
 }
 
 @media (prefers-color-scheme: dark) {

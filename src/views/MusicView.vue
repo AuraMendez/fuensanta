@@ -1,7 +1,7 @@
 <template>
     <DefaultLayout>
         <div class="music-section text-center">
-            <img class="title mb-8" src="../../public/title-music-min.png" alt="" height="30">
+            <img class="title mb-8" src="../../public/title-music-min.png" alt="" height="40">
 
             <template v-for="(item, i) in musicStore.personalMusic" :key="i">
                 <MusicItem :item="item"></MusicItem>

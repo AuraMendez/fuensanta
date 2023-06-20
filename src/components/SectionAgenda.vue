@@ -31,7 +31,7 @@
             </template>
         </v-container>
 
-        <div ref="pastConcertsTitle" class="past-concerts-header my-6" @click="togglePastConcerts">
+        <div ref="pastConcertsTitle" class="past-concerts-header agenda-list my-6" @click="togglePastConcerts">
             <img src="../../public/past-concerts-1-min.png" alt="" height="30">
             <v-icon v-if="showPastConcerts" icon="mdi-chevron-up"></v-icon>
             <v-icon v-else icon="mdi-chevron-down"></v-icon>
@@ -99,6 +99,10 @@ export default {
     text-align: center;
 }
 
+.agenda-list {
+    max-width: var(--ma);
+}
+
 h1 {
     font-size: 2rem;
 }
@@ -118,9 +122,10 @@ h1 {
 
 .past-concerts-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 1rem 3rem;
+    gap: 50px;
 }
 
 .past-concerts-header:hover {

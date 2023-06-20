@@ -30,7 +30,7 @@ const lang = ref('en');
 <style scoped>
 
 .text {
-    max-width: 1000px;
+    max-width: var(--max-width);
     text-align: justify;
     margin: 0 auto;
 }
