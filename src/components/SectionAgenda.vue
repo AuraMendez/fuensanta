@@ -1,7 +1,11 @@
 
 <template>
     <div class="section-agenda">
-        <img src="../../public/title-tour-min.png" alt="" height="50" class="mb-12">
+        <div class="page-title">
+                <img class="title" src="../../public/title-tour-min.png" alt="">
+                <br/>
+                <img class="icon" src="../../public/img-pajarraco-min.png" alt="">
+            </div>
 
         <v-container class="agenda-list">
             <template v-for="(concert, i) in agendaStore.futureConcerts" :key="concert.id">

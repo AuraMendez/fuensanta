@@ -2,7 +2,12 @@
     <DefaultLayout>
         <div class="video-section text-center">
 
-            <img class="title mb-8" src="../../public/title-video-min.png" alt="" height="30">
+            <div class="page-title">
+                <img class="title" src="../../public/title-video-min.png" alt="">
+                <br/>
+                <img class="icon" src="../../public/img-escarabajo-min.png" alt="">
+            </div>
+
 
             <div class="videos">
                 <template v-for="video in videoStore.videoStore" :key="video.id">

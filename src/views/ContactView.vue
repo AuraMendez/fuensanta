@@ -1,7 +1,12 @@
 <template>
     <DefaultLayout>
         <div class="contact-section text-center">
-            <img class="title mb-8" src="../../public/title-contact-min.png" alt="" height="30">
+
+            <div class="page-title">
+                <img class="title" src="../../public/title-contact-min.png" alt="">
+                <br/>
+                <img class="icon" src="../../public/img-lentes-min.png" alt="">
+            </div>
 
             <!-- <h3>Contact me</h3> -->
             <p class="mail">email@email.com</p>

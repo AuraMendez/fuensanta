@@ -29,4 +29,13 @@ export default {
   <RouterView />
 </template>
 
-<style scoped></style>
+<style>
+
+.page-title .title{ 
+  height: 50px;
+}
+.page-title .icon{
+  margin: 1.5rem 0 2rem 0;
+  height: 80px;
+}
+</style>

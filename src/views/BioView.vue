@@ -1,8 +1,10 @@
 <template>
     <DefaultLayout>
         <div class="bio-section text-center">
-            <div>
-                <img class="title mb-8 mx-auto" src="../../public/title-bio-min.png" alt="" height="30">
+            <div class="page-title">
+                <img class="title" src="../../public/title-bio-min.png" alt="">
+                <br/>
+                <img class="icon" src="../../public/img-cajita-min.png" alt="">
             </div>
 
             <span>

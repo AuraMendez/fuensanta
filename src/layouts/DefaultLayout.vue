@@ -103,7 +103,7 @@ header .title {
 /* BODY */
 main {
     max-width: 1200px;
-    margin: 1rem auto;
+    margin: 1rem auto 4rem auto;
     padding: 0 3rem;
 }
 
