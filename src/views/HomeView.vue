@@ -1,9 +1,12 @@
 
 <template>
   <DafaultLayout>
-    <div class="noche-img">
-      <a href="https://orcd.co/noche" target="_blank">
-        <img src="../../public/noche-cover-min.jpg">
+    <div class="img-container">
+      <img class="dibujo" src="../../public/homepage-blue-min.png" />
+      <br />
+      <a href="https://orcd.co/principiodelfuego"
+        target="_blank">
+        <img class="latest-news" src="../../public/principio-out-2-min.png" />
       </a>
     </div>
   </DafaultLayout>
@@ -14,13 +17,26 @@ import DafaultLayout from '../layouts/DefaultLayout.vue';
 </script>
 
 <style scoped>
-.noche-img {
-  margin: 3rem 0;
-  text-align: center;
+.img-container {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-a img {
-  width: 100%;
-  max-width: 600px;
+img.dibujo {
+  max-height: 60vh;
+  max-width: 100%;
+}
+
+img.latest-news {
+  max-height: 100px;
+  max-width: 100%;
+}
+
+img.latest-news:hover {
+  transform: scale(103%);
 }
 </style>

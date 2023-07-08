@@ -1,21 +1,27 @@
 <template>
     <header>
         <router-link to="/">
-            <img class="title" src="../../public/fuensanta-min.png" alt="" height="80">
+            <img class="title" src="../../public/fuensanta-3-min.png" alt="">
         </router-link>
-        <img class="menu-btn" src="../../public/menu-btn-min.png" width="60" @click="overlay = true" />
+        <img class="menu-btn" src="../../public/menu-btn-min.png" @click="overlay = true" />
     </header>
     <!-- MENU -->
     <template v-if="overlay">
         <div class="overlay" :class="overlay ? 'visible' : null" @click="overlay = false">
-            <div class="menu">
-                <router-link v-for="(item, i) in menuItems" :key="i" class="mb-6" :to="item.route">
-                    <img :src="item.numImg" alt="" height="30" class="mr-12">
-                    <img :src="item.titleImg" alt="" height="40" class="menu-item">
-                </router-link>
+            <div class="close-btn">
+                <img src="../../public/btn-x2-min.png" alt="close" @click="overlay = false">
             </div>
 
-            <v-btn icon="mdi-close" class="close" variant="text" @click="overlay = false" color="black"></v-btn>
+            <div class="menu">
+                <img class="menu-img" src="../../public/dibujo-vertical-min.png" alt="">
+                <div class="menu-list">
+                    <router-link v-for="(item, i) in menuItems" :key="i" class="mb-6" :to="item.route">
+                        <img :src="item.numImg" alt="" height="30" class="mr-12">
+                        <img :src="item.titleImg" alt="" :height="item.route === '/music' ? 50 : 40" class="menu-item">
+                    </router-link>
+                </div>
+            </div>
+
         </div>
     </template>
     <main>
@@ -34,8 +40,9 @@
     </footer>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
+
 import tourTitleImg from '../../public/title-tour-min.png'
 import musicTitleImg from '../../public/title-music-min.png'
 import videoTitleImg from '../../public/title-video-min.png'
@@ -47,46 +54,60 @@ import n3 from '../../public/number-3-min.png'
 import n4 from '../../public/number-4-min.png'
 import n5 from '../../public/number-5-min.png'
 
-export default {
-    setup() {
+const overlay = ref(false);
 
-        const menuItems = [
-            { route: '/tour', numImg: n1, titleImg: tourTitleImg },
-            { route: '/music', numImg: n2, titleImg: musicTitleImg },
-            { route: '/video', numImg: n3, titleImg: videoTitleImg },
-            { route: '/bio', numImg: n4, titleImg: bioTitleImg },
-            { route: '/contact', numImg: n5, titleImg: contactTitleImg },
-        ];
-        const overlay = ref(false);
+const menuItems = [
+    { route: '/tour', numImg: n1, titleImg: tourTitleImg },
+    { route: '/music', numImg: n2, titleImg: musicTitleImg },
+    { route: '/video', numImg: n3, titleImg: videoTitleImg },
+    { route: '/bio', numImg: n4, titleImg: bioTitleImg },
+    { route: '/contact', numImg: n5, titleImg: contactTitleImg },
+];
 
-        return { overlay, menuItems }
-    }
-}
 </script>
 
 <style scoped>
 /* HEADER */
 header {
-    text-align: center;
-    padding: 2rem 0;
-    display: block;
+    width: 100%;
+    height: 30px;
+    /* min-height: 50px; */
+    /* max-height: 75px; */
+    /* padding: 1rem 0; */
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header a {
+    height: 100%;
+    width: 100%;
 }
 
 header .menu-btn {
-    position: absolute;
-    right: 1.8rem;
+    padding-right: 2rem;
+    height: 100%;
+    flex-shrink: 0;
 }
 
 header .menu-btn:hover {
     cursor: pointer;
+    height: 103%;
 }
 
+header .title {
+    padding: 0 2rem;
+    height: 100%;
+}
+
+/* BODY */
 main {
     max-width: 1200px;
-    margin: 3rem auto;
+    margin: 1rem auto;
     padding: 0 3rem;
 }
 
+/* FOOTER */
 footer {
     position: fixed;
     bottom: 0;
@@ -96,35 +117,71 @@ footer {
     background-color: var(--bg-color);
 }
 
+/* MENU */
 .overlay {
     width: 100%;
     height: 100vh;
+    padding: 2rem;
     z-index: 30;
     background-color: #f8f0d9;
     position: fixed;
     top: 0;
     display: flex;
-    padding: 2rem;
-    color: var(--bg-color);
-    text-align: center;
-    font-size: 2rem;
+    flex-direction: column;
     /* transform: scale(0.1);
     transition: transform 2s; */
 }
 
-.overla .overlay .close {
-    justify-items: end;
-    color: black;
+.overlay .close-btn {
+    align-self: flex-end;
+    height: 35px;
+}
+
+.overlay .close-btn img {
+    height: 30px;
+}
+
+.overlay .close-btn img:hover {
+    cursor: pointer;
+    transform: scale(103%);
 }
 
 .overlay .menu {
-    align-self: center;
-    margin: 0 auto;
+    display: flex;
+    gap: 3rem;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay .menu .menu-img {
+    max-width: 40%;
+    height: 70vh;
+    display: none;
+}
+
+.overlay .menu .menu-list {
     display: flex;
     flex-direction: column;
 }
 
-.overlay a:hover .menu-item {
-    height: 42px;
+.overlay .menu .menu-list a:hover {
+    transform: scale(103%);
+}
+
+/* Tablet */
+@media (min-width: 481px) {
+    header {
+        height: 40px;
+        margin: 2rem 0;
+    }
+}
+
+/* Laptop */
+@media (min-width: 769px) {
+
+    .overlay .menu .menu-img {
+        display: block;
+    }
 }
 </style>
