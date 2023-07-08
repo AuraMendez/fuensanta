@@ -9,7 +9,7 @@
     <template v-if="overlay">
         <div class="overlay" :class="overlay ? 'visible' : null" @click="overlay = false">
             <div class="close-btn">
-                <img src="../../public/btn-x2-min.png" alt="close" @click="overlay = false">
+                <img src="../../public/btn-x-min.png" alt="close" @click="overlay = false">
             </div>
 
             <div class="menu">
@@ -92,7 +92,7 @@ header .menu-btn {
 
 header .menu-btn:hover {
     cursor: pointer;
-    height: 103%;
+    transform: scale(103%);
 }
 
 header .title {
@@ -103,7 +103,7 @@ header .title {
 /* BODY */
 main {
     max-width: 1200px;
-    margin: 1rem auto 4rem auto;
+    margin: 1rem auto 6rem auto;
     padding: 0 3rem;
 }
 
@@ -143,7 +143,7 @@ footer {
 
 .overlay .close-btn img:hover {
     cursor: pointer;
-    transform: scale(103%);
+    transform: scale(105%);
 }
 
 .overlay .menu {

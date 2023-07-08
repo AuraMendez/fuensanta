@@ -8,8 +8,7 @@
                 <img class="icon" src="../../public/img-lentes-min.png" alt="">
             </div>
 
-            <!-- <h3>Contact me</h3> -->
-            <p class="mail">email@email.com</p>
+            <!-- <p class="mail">email@email.com</p> -->
 
             <div class="mailing-list mt-12">
                 <h3>Subscribe to my mailing list</h3>
@@ -19,7 +18,7 @@
                     <v-select label="Country/Region" v-model="form.country" :items="countries" item-title="name"
                         item-value="code"></v-select>
                     <p v-if="message.text" :class="`mt-2 mb-4 text-${message.color}`">{{ message.text }}</p>
-                    <v-btn type="submit">Subscribe</v-btn>
+                    <img class="subscribe-btn" src="../../public/btn-subscribe-min.png" alt="" @click="submit">
                 </v-form>
             </div>
         </div>
@@ -87,7 +86,6 @@ async function submit() {
     }
 }
 
-
 </script>
 
 <style scoped>
@@ -105,5 +103,13 @@ async function submit() {
 .mailing-list h3 {
     margin-bottom: 24px;
     text-transform: uppercase;
+}
+
+.subscribe-btn {
+    height: 40px;
+}
+.subscribe-btn:hover {
+    transform: scale(103%);
+    cursor: pointer;
 }
 </style>
