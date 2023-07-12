@@ -1,4 +1,6 @@
 /* color palette from <https://github.com/vuejs/theme> */
+
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant&display=swap');
 @font-face {
   font-family: "Marion";
   src: local("Marion"), url(./fonts/Marion/Marion-Regular.ttf) format("truetype");
@@ -11,7 +13,9 @@
 
 :root {
   --bg-color: #fefaee;
-  --main-font: "Baskerville", Georgia, Times, serif;
+  /* --main-font: "Baskerville", Georgia, Times, serif; */
+  /* --main-font: "Baskerville", Georgia, Times, serif; */
+  --main-font: 'Ysabeau Infant', sans-serif;
   --max-width: 900px;
 }
 

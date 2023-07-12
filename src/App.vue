@@ -32,7 +32,8 @@ export default {
 <style>
 
 .page-title .title{ 
-  height: 50px;
+  height: 40px;
+  margin-top: 30px;
 }
 .page-title .icon{
   margin: 1.5rem 0 2rem 0;
