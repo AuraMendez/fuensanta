@@ -77,6 +77,7 @@ header {
     margin: 1rem 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 header a {
@@ -97,7 +98,7 @@ header .menu-btn:hover {
 
 header .title {
     padding: 0 2rem;
-    height: 100%;
+    height: 20px;
 }
 
 /* BODY */
@@ -123,11 +124,12 @@ footer {
     height: 100vh;
     padding: 2rem;
     z-index: 30;
-    background-color: #f8f0d9;
+    background-color: var(--bg-color);
     position: fixed;
     top: 0;
     display: flex;
     flex-direction: column;
+    /* position: relative; */
     /* transform: scale(0.1);
     transition: transform 2s; */
 }
@@ -138,7 +140,7 @@ footer {
 }
 
 .overlay .close-btn img {
-    height: 30px;
+    height: 20px;
 }
 
 .overlay .close-btn img:hover {
@@ -152,17 +154,21 @@ footer {
     height: 100%;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .overlay .menu .menu-img {
     max-width: 40%;
     height: 70vh;
     display: none;
+    position: absolute;
+    left: 25%;
 }
 
 .overlay .menu .menu-list {
     display: flex;
     flex-direction: column;
+    /* position: absolute; */
 }
 
 .overlay .menu .menu-list a:hover {
