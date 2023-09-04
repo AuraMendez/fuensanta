@@ -8,7 +8,7 @@
                 <img class="icon" src="../../public/img-lentes-min.png" alt="">
             </div>
 
-            <!-- <p class="mail">email@email.com</p> -->
+            <p class="mail">fuensantacontact@gmail.com</p>
 
             <div class="mailing-list mt-12">
                 <h3>Subscribe to my mailing list</h3>
