@@ -1,9 +1,9 @@
 <template>
-    <DefaultLayout>
+    <DefaultLayout :showName="true">
         <div class="music-section text-center">
             <div class="page-title">
                 <img class="title" src="../../public/title-music-min.png" alt="">
-                <br/>
+                <br />
                 <img class="icon" src="../../public/img-tierra-min.png" alt="">
             </div>
 

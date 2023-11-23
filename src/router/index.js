@@ -37,6 +37,11 @@ const router = createRouter({
       component: () => import('../views/MusicView.vue'),
     },
     {
+      path: '/ensamble-grande-mexico-tour',
+      name: 'ensamble-grande-mexico-tour',
+      component: () => import('../views/EnsambleGrandeTourView.vue'),
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),

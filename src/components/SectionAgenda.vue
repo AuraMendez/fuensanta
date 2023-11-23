@@ -2,10 +2,10 @@
 <template>
     <div class="section-agenda">
         <div class="page-title">
-                <img class="title" src="../../public/title-tour-min.png" alt="">
-                <br/>
-                <img class="icon" src="../../public/img-pajarraco-min.png" alt="">
-            </div>
+            <img class="title" src="../../public/title-tour-min.png" alt="">
+            <br />
+            <img class="icon" src="../../public/img-pajarraco-min.png" alt="">
+        </div>
 
         <v-container class="agenda-list">
             <template v-for="(concert, i) in agendaStore.futureConcerts" :key="concert.id">
@@ -44,7 +44,7 @@
         <v-container class="agenda-list" v-if="showPastConcerts">
             <template v-for="(concert, i) in agendaStore.pastConcerts" :key="concert.id">
                 <v-divider v-if="smAndDown && i" class="my-9"></v-divider>
-                <v-row>
+                <v-row class="past-concerts">
                     <v-col :cols="smAndDown ? 12 : 3" class="date">
                         <p>{{ formatDate(concert.date) }}</p>
                     </v-col>
@@ -73,12 +73,12 @@ export default {
 
         const agendaStore = useAgendaStore();
 
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
         function formatDate(dateStr) {
             const date = new Date(dateStr);
-            const month = date.toLocaleString('default', { month: 'long' }).toUpperCase();
-            // const year = date.getFullYear();
-            return `${month} ${date.getDate()}, ${date.getFullYear()}`;
-            // return `${month} ${date.getDate()}`;
+            const month = months[date.getUTCMonth()].toUpperCase();
+            return `${month} ${date.getUTCDate()}, ${date.getUTCFullYear()}`;
         }
 
         const showPastConcerts = ref(false);
@@ -136,6 +136,11 @@ h1 {
     background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
+
+.past-concerts p {
+    color: rgba(0, 0, 0, 0.6);
+}
+
 .tickets-btn img:hover {
     height: 40px;
 }

@@ -1,5 +1,5 @@
 <template>
-    <DafaultLayout>
+    <DafaultLayout :showName="true">
         <SectionAgenda></SectionAgenda>
     </DafaultLayout>
 </template>

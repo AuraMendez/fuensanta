@@ -1,14 +1,14 @@
 <template>
-    <DefaultLayout>
+    <DefaultLayout :showName="true">
         <div class="bio-section text-center">
             <div class="page-title">
                 <img class="title" src="../../public/title-bio-min.png" alt="">
-                <br/>
+                <br />
                 <img class="icon" src="../../public/img-cajita-min.png" alt="">
             </div>
 
             <span>
-                <v-btn variant="text" @click="lang = 'en'">EN</v-btn> | 
+                <v-btn variant="text" @click="lang = 'en'">EN</v-btn> |
                 <v-btn variant="text" @click="lang = 'es'">ES</v-btn>
             </span>
             <div class="text">
@@ -30,7 +30,6 @@ const lang = ref('en');
 </script>
 
 <style scoped>
-
 .text {
     max-width: var(--max-width);
     text-align: justify;
