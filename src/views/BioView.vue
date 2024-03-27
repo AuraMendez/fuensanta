@@ -7,9 +7,8 @@
                 <img class="icon" src="../../public/img-cajita-min.png" alt="">
             </div>
 
-            <span>
-                <v-btn variant="text" @click="lang = 'en'">EN</v-btn> | 
-                <v-btn variant="text" @click="lang = 'es'">ES</v-btn>
+            <span v-if="bioStore.bio.es.lenght && bioStore.bio.en.lenght">
+                <v-btn variant="text" @click="lang = 'en'">EN</v-btn> | <v-btn variant="text" @click="lang = 'es'">ES</v-btn>
             </span>
             <div class="text">
                 <p v-for="(text, index) in bioStore.bio[lang].split('\n')" :key="index">
