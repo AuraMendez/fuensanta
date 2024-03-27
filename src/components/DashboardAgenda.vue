@@ -12,7 +12,7 @@
         </v-list-item>
         <v-divider class="mb-3"></v-divider>
         <AgendaListItem v-for="concert in agendaStore.pastConcerts" :key="concert.id" :concert="concert"
-            @edit-concert="openForm" @delete-concert="deleteConcert"></AgendaListItem>
+            @edit-concert="openForm" @delete-concert="deleteConcert" disabled></AgendaListItem>
     </v-list>
     <ConcertForm ref="concert_form_component"></ConcertForm>
     <ConfirmDialog ref="confirm_dialog_component"></ConfirmDialog>

@@ -1,7 +1,8 @@
 <template>
     <header>
         <router-link to="/">
-            <img class="title" src="../../public/fuensanta-3-min.png" alt="">
+            <img v-if="props.showName" class="title" src="../../public/fuensanta-3-min.png" alt="">
+            <p v-else>(logo)</p>
         </router-link>
         <img class="menu-btn" src="../../public/menu-btn-min.png" @click="overlay = true" />
     </header>
@@ -53,6 +54,8 @@ import n2 from '../../public/number-2-min.png'
 import n3 from '../../public/number-3-min.png'
 import n4 from '../../public/number-4-min.png'
 import n5 from '../../public/number-5-min.png'
+
+const props = defineProps(['showName'])
 
 const overlay = ref(false);
 

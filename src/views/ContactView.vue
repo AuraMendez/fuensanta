@@ -1,10 +1,10 @@
 <template>
-    <DefaultLayout>
+    <DefaultLayout :showName="true">
         <div class="contact-section text-center">
 
             <div class="page-title">
                 <img class="title" src="../../public/title-contact-min.png" alt="">
-                <br/>
+                <br />
                 <img class="icon" src="../../public/img-lentes-min.png" alt="">
             </div>
 
@@ -92,6 +92,7 @@ async function submit() {
 .mail {
     font-size: 1.5rem;
 }
+
 .mailing-list {
     max-width: 600px;
     margin: 0 auto;
@@ -108,6 +109,7 @@ async function submit() {
 .subscribe-btn {
     height: 40px;
 }
+
 .subscribe-btn:hover {
     transform: scale(103%);
     cursor: pointer;

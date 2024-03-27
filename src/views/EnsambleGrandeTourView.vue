@@ -1,20 +1,17 @@
 
 <template>
-  <DafaultLayout :showName="true">
-    <div class="img-container">
-      <img class="dibujo" src="../../public/homepage-blue-min.png" />
-      <br />
-      <a href="https://orcd.co/principiodelfuego" target="_blank">
-        <img class="latest-news" src="../../public/principio-out-2-min.png" />
-      </a>
+  <DafaultLayout :showName="false">
+    <div>
+      <h1>Ensamble Grande Mexico Tour</h1>
+      <h4>April 2024/Abril 2024</h4>
     </div>
   </DafaultLayout>
 </template>
-
+  
 <script setup>
 import DafaultLayout from '../layouts/DefaultLayout.vue';
 </script>
-
+  
 <style scoped>
 .img-container {
   width: 100%;
@@ -38,4 +35,4 @@ img.latest-news {
 img.latest-news:hover {
   transform: scale(103%);
 }
-</style>
+</style>Ï

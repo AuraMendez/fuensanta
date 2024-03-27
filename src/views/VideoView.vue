@@ -1,10 +1,10 @@
 <template>
-    <DefaultLayout>
+    <DefaultLayout :showName="true">
         <div class="video-section text-center">
 
             <div class="page-title">
                 <img class="title" src="../../public/title-video-min.png" alt="">
-                <br/>
+                <br />
                 <img class="icon" src="../../public/img-escarabajo-min.png" alt="">
             </div>
 

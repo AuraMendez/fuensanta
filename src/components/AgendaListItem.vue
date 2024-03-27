@@ -1,7 +1,7 @@
 <template>
-    <v-list-item>
-            <div class="concerts-list">
-                <p class="column date">{{ concert.date }} - {{ concert.program }}</p>
+    <v-list-item class="text-red">
+            <div class="concerts-list" >
+                <p class="column date" >{{ concert.date }} - {{ concert.program }}</p>
                 <p class="column venue">{{ concert.venue }}, {{ concert.location }}</p>
                 <span class="column actions">
                     <v-btn icon="mdi-pencil" size="x-small" variant="text" @click="editConcert(concert.id)"></v-btn>
@@ -15,6 +15,7 @@
 export default {
     props: {
         concert: Object,
+        disabled: Boolean,
     },
     emits: ['edit-concert', 'delete-concert'],
     methods: {
@@ -42,6 +43,7 @@ export default {
 .column {
     width: 100%;
     text-align: center;
+    background-color: red;
 }
 
 
