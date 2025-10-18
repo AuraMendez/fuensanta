@@ -1,14 +1,14 @@
 <template>
-    <v-list-item class="text-red">
-            <div class="concerts-list" >
-                <p class="column date" >{{ concert.date }} - {{ concert.program }}</p>
-                <p class="column venue">{{ concert.venue }}, {{ concert.location }}</p>
-                <span class="column actions">
-                    <v-btn icon="mdi-pencil" size="x-small" variant="text" @click="editConcert(concert.id)"></v-btn>
-                    <v-btn icon="mdi-delete" size="x-small" variant="text" @click="deleteConcert(concert)"></v-btn>
-                </span>
-            </div>
-        </v-list-item>
+    <v-list-item>
+        <div class="concerts-list">
+            <p class="column date">{{ concert.date }} - {{ concert.program }}</p>
+            <p class="column venue">{{ concert.venue }}, {{ concert.location }}</p>
+            <span class="column actions">
+                <v-btn icon="mdi-pencil" size="x-small" variant="text" @click="editConcert(concert.id)"></v-btn>
+                <v-btn icon="mdi-delete" size="x-small" variant="text" @click="deleteConcert(concert)"></v-btn>
+            </span>
+        </div>
+    </v-list-item>
 </template>
 
 <script>
@@ -43,7 +43,6 @@ export default {
 .column {
     width: 100%;
     text-align: center;
-    background-color: red;
 }
 
 
