@@ -61,7 +61,7 @@ export default {
   setup() {
     const userEmail = ref(auth.currentUser.reloadUserInfo.email);
 
-    let tab = ref('music');
+    let tab = ref('agenda');
     return { tab, userEmail }
   },
 }
