@@ -16,6 +16,7 @@
         <v-tab value="agenda">Agenda</v-tab>
         <v-tab value="video">Video</v-tab>
         <v-tab value="music">Music</v-tab>
+        <v-tab value="mailingList">Mailing List</v-tab>
       </v-tabs>
 
       <v-card-text>
@@ -36,6 +37,10 @@
             <TabMusic></TabMusic>
           </v-window-item>
 
+          <v-window-item value="mailingList">
+            <TabMailingList></TabMailingList>
+          </v-window-item>
+
         </v-window>
       </v-card-text>
     </v-card>
@@ -48,6 +53,7 @@ import TabBio from '../components/DashboardBio.vue';
 import TabAgenda from '../components/DashboardAgenda.vue';
 import TabVideo from '../components/DashboardVideo.vue';
 import TabMusic from '../components/DashboardMusic.vue';
+import TabMailingList from '../components/DashboardMailingList.vue';
 import { auth } from "../firebaseConfig";
 
 export default {
@@ -57,6 +63,7 @@ export default {
     TabAgenda,
     TabVideo,
     TabMusic,
+    TabMailingList,
   },
   setup() {
     const userEmail = ref(auth.currentUser.reloadUserInfo.email);

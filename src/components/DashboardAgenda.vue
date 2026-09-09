@@ -1,4 +1,3 @@
-
 <template>
     <div class="d-flex justify-end my-6">
         <v-btn color="lime-darken-4" variant="outlined" @click="openForm(null)">New concert</v-btn>
@@ -65,4 +64,3 @@ export default {
     },
 }
 </script>
-
