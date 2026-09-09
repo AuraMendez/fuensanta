@@ -1,12 +1,7 @@
-
 <template>
   <DafaultLayout :showName="true">
     <div class="img-container">
       <img class="dibujo" src="../../public/homepage-blue-min.png" />
-      <br />
-      <a href="https://orcd.co/principiodelfuego" target="_blank">
-        <img class="latest-news" src="../../public/principio-out-2-min.png" />
-      </a>
     </div>
   </DafaultLayout>
 </template>

@@ -30,13 +30,14 @@
     </main>
     <footer>
         <div>
-            <v-btn icon="mdi-instagram" variant="text" href="https://www.instagram.com/fuensanta.fuensanta/"
+            <v-btn icon variant="text" href="https://fuensanta.bandcamp.com" target="_blank">
+                <img class="icon-logo" src="../../public/bandcamp_logo.png" />
+            </v-btn>
+            <v-btn icon="mdi-instagram" variant="text" href="https://www.instagram.com/fuensanta.fuensanta"
                 target="_blank"></v-btn>
-            <v-btn icon="mdi-facebook" variant="text" href="https://www.facebook.com/fuensanta.mendezlecomte"
+            <v-btn icon="mdi-facebook" variant="text" href="https://www.facebook.com/fuensantamendezmusic"
                 target="_blank"></v-btn>
             <v-btn icon="mdi-youtube" variant="text" href="https://www.youtube.com/@Fuensanta" target="_blank"></v-btn>
-            <v-btn icon="mdi-spotify" variant="text" href="https://open.spotify.com/artist/5Tda1L0VLxqMBAThEKFIjD"
-                target="_blank"></v-btn>
         </div>
     </footer>
 </template>
@@ -164,33 +165,33 @@ footer {
     max-width: 40%;
     height: 70vh;
     display: none;
-    position: absolute;
-    left: 25%;
 }
 
 .overlay .menu .menu-list {
     display: flex;
     flex-direction: column;
-    /* position: absolute; */
 }
 
 .overlay .menu .menu-list a:hover {
     transform: scale(103%);
 }
 
+.icon-logo {
+    width: 24px;
+}
+
 /* Tablet */
-@media (min-width: 481px) {
+@media (min-width: 550px) {
     header {
         height: 40px;
         margin: 2rem 0;
     }
-}
-
-/* Laptop */
-@media (min-width: 769px) {
 
     .overlay .menu .menu-img {
         display: block;
     }
 }
+
+/* Laptop */
+@media (min-width: 769px) {}
 </style>

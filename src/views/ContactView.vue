@@ -8,7 +8,10 @@
                 <img class="icon" src="../../public/img-lentes-min.png" alt="">
             </div>
 
-            <p class="mail">fuensantacontact@gmail.com</p>
+            <p class="mail">
+                fuensantacontact@gmail.com
+            </p>
+            <p class="mail">[management]</p>
 
             <div class="mailing-list mt-12">
                 <h3>Subscribe to my mailing list</h3>
@@ -30,6 +33,11 @@ import { ref } from 'vue';
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 import { addNewDoc } from "../services/firestore";
 import countries from "../assets/countries.json";
+// import VueClipboard from 'vue-clipboard2'
+
+// import Vue from 'vue'
+// Vue.use(VueClipboard)
+
 
 const rules = {
     name: [
@@ -91,6 +99,10 @@ async function submit() {
 <style scoped>
 .mail {
     font-size: 1.5rem;
+}
+
+.mail>span>i {
+    width: 20px;
 }
 
 .mailing-list {
